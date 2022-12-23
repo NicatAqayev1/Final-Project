@@ -1,0 +1,24 @@
+﻿@model RegisterVM
+<section id="login">
+    <div class="container">
+        <div class="row login">
+            <form id="loginForm" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" style="color: red;"></div>
+                <input asp-for="FullName" placeholder="Full Name">
+                <input asp-for="UserName" placeholder="User Name">
+                <input asp-for="Email" placeholder="Email">
+                <input asp-for="Password" placeholder="Password">
+                <input asp-for="ConfirmPassword" placeholder="ConfirmPassword">
+                <button type="submit" class="viewshopAbutton">Create</button>
+                <div class="links mt-3 row justify-content-between" style=" border-top: 1px solid #e3e0e0; padding: 10px 0;">
+                    <a asp-controller="home" asp-action="index" class="col-lg-6">Return to Store</a>
+                    <a asp-controller="account" asp-action="login" class="col-lg-6" style="text-align: right;">Have you account?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Script{
+    <partial name="_ValidationFormScriptPartial" />
+}

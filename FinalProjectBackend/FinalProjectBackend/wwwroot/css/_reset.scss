@@ -1,0 +1,205 @@
+$primary-font-family : 'Text Me One', sans-serif;
+$second-font-family : 'Philosopher', sans-serif;
+$primary-color : #c1001c;
+$second-red-color : #f01737;
+$button-hover-color : #d2aa5c;
+::selection{
+    background-color: $primary-color;
+    color: white;
+}
+a{
+    text-decoration: none;
+}
+ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+.container-fluid{
+    padding: 0;
+} 
+.row{
+    margin: 0px;
+    padding: 0px;
+}
+input,textarea,button,select{
+    outline: 0;
+    border: 0;
+}
+img{
+    image-rendering: -webkit-optimize-contrast;
+    object-fit: cover;
+}
+// Static 
+.sale{
+    float: left;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    overflow: hidden;
+    line-height: 30px;
+    width: 40px;
+    height: 30px;
+    transition-delay: 0s;
+    transition-duration: .3s,.25s,.25s;
+    transition-property: opacity,padding,width;
+    transition-timing-function: cubic-bezier(.86,0,.07,1);
+    background: $primary-color;
+    color: white;
+    font-family: $primary-font-family;
+    font-size: 13px;
+}
+.viewshopAbutton{
+    color: black;
+    font-family: $primary-font-family;
+    background-color: white;
+    padding: 10px 20px;
+    display: inline-block;
+    border: 1px solid #e4e4e4;
+    transition: all 0.3s linear;
+    &:hover{
+        background-color: $button-hover-color;
+        color: white;
+        transition: all 0.3s linear;
+    }
+}
+
+.product-card{
+    padding: 10px;
+    text-align: center;
+    background-color: white;
+    .image{
+        position: relative;
+        .overlay{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: all 0.3s linear;
+            cursor: pointer;
+            z-index: 3;
+            .buttons{
+                position: absolute;
+                top: 50%;
+                right: 20px;
+                transform: translate(15px,-50%);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                transition: all 0.3s linear;
+                div{
+                    a{
+                        color: $primary-color;
+                        padding: 10px;
+                        background-color: white;
+                        display: inline-block;
+                        margin: 5px;
+                        transition: all 0.3s linear;
+                        i{
+
+                        }
+                        &:hover{
+                            background-color: $primary-color;
+                            color: white;
+                            transition: all 0.3s linear;
+                        }
+                    }
+                }
+            }
+        }
+        .main{
+            opacity: 1;
+            transition: all 0.3s linear;
+            width: 100%;
+        }
+        .hover{
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: all 0.3s linear;
+            width: 100%;
+        }
+        &:hover{
+            .overlay{
+                opacity: 1;
+                transition: all 0.3s linear;
+                .buttons{
+                    transform: translate(0px,-50%);
+                    transition: all 0.3s linear;
+                }
+            }
+            .main{
+                opacity: 0;
+                transition: all 0.3s linear;
+            }
+            .hover{
+                opacity: 1;
+                transition: all 0.3s linear;
+            }
+        }
+    }
+    .content{
+        padding: 30px;
+        .prod-name{
+            font-family: $second-font-family;
+            font-size: 16px;
+            color: black;
+            display: block;
+            position: relative;
+            border-bottom: 1px solid #e4e4e4;
+            padding: 20px 0;
+            transition: all 0.3s;
+            &::after{
+                clear: both;
+                content: "";
+                display: inline-block;
+                height: 10px;
+                margin: 0 auto;
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                width: 10px;
+                -webkit-border-radius: 1px;
+                -moz-border-radius: 1px;
+                -ms-border-radius: 1px;
+                -o-border-radius: 1px;
+                box-shadow: 0 0 0 8px #fff;
+                -webkit-box-shadow: 0 0 0 8px #fff;
+                border-radius: 1px;
+                background: #000;
+                transform: rotate(-45deg);
+            }
+            &:hover{
+                color: $primary-color;
+                transition: all 0.3s;
+            }
+        }
+        h3{
+            font-size: 20px;
+            color: $primary-color;
+            font-family: $primary-font-family;
+            margin: 20px 0;
+            font-weight: 700;
+        }
+        .addtocart{
+            color: black;
+            font-family: "Text Me One", sans-serif;
+            background-color: white;
+            padding: 10px 20px;
+            border: 1px solid #e4e4e4;
+            display: inline-block;
+
+        }
+    }
+}

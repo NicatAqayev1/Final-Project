@@ -1,0 +1,28 @@
+﻿@model Review
+<form method="post" asp-action="Edit" asp-controller="blog" asp-route-id="@Model.Id">
+    <div class="comment-post-box">
+        <div class="row" style="position: relative;">
+            <div class="col-12" style="padding: 0px;">
+                <textarea id="MessageEdit" name="Message" placeholder="Write a comment" style="height: 100px; width: 100%; padding: 10px; box-shadow: 0px -1px 6px 0px #80808040;">@Model.Message</textarea>
+            </div>
+            <div class="col-2" style="position: absolute; right: 0; top: 0; width: auto; background-color: #f7f7f7; padding: 0;">
+                <div class="coment-btn">
+                    <a class="btn editComment" data-rid="@Model.Id" style="border: 0;">Edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $(document).on("click", ".editComment", function (e) {
+        e.preventDefault();
+
+        var Message = $("#MessageEdit").val()
+        fetch("Edit" + "?Message=" + Message + "&id=" + $(this).attr("data-rid")).then(res => {
+            return res.text();
+        }).then(data => {
+            $(".comments").html(data);
+            $("#MessageEdit").val("")
+        })
+    })
+</script>

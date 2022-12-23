@@ -1,0 +1,838 @@
+﻿@model HomeVM
+@{
+    int topFeaturedCount = 0;
+    @foreach (Product product in Model.Products.Where(p => p.IsFeatured))
+    {
+        foreach (ProductColorSize productColorSize in product.ProductColorSizes)
+        {
+            topFeaturedCount += 1;
+        }
+    }
+    double featuredTake = Math.Ceiling((double)topFeaturedCount / 2);
+
+
+    int topNewArrivalCount = 0;
+    @foreach (Product product in Model.Products.Where(p => p.IsNewArrival))
+    {
+        foreach (ProductColorSize productColorSize in product.ProductColorSizes)
+        {
+            topNewArrivalCount += 1;
+        }
+    }
+    double newTake = Math.Ceiling((double)topNewArrivalCount / 2);
+
+
+    int topBestCount = 0;
+    @foreach (Product product in Model.Products.Where(p => p.IsBestseller))
+    {
+        foreach (ProductColorSize productColorSize in product.ProductColorSizes)
+        {
+            topBestCount += 1;
+        }
+    }
+    double BestTake = Math.Ceiling((double)topBestCount / 2);
+}
+<div class="overlay-first-modal"></div>
+<section class="first-modal">
+    <div class="content">
+        <h3>Get to know the latest offers</h3>
+        <h5>Subscribe and get notified at first on the latest update and offers!</h5>
+        <form method="post" asp-controller="Home" asp-action="Subscriber">
+            <input id="email" name="email" class="subsEmail" placeholder="Enter your email id" />
+            <a class="subscriber viewshopAbutton">Submit<i class="fa-solid fa-envelope"></i></a>
+        </form>
+        <p>We do not spam</p>
+    </div>
+    <a class="modal-close-icon viewshopAbutton" style="color: black;" href="#">
+    <i class="fa-solid fa-xmark"></i>
+    </a>
+</section>
+<section id="intro">
+    <div class="container-fluid">
+        <div class="row intro">
+            <div class="swiper mySwiperIntro">
+                <div class="swiper-wrapper">
+                    @for (int i = 0; i < Model.IntroSliders.Count(); i++)
+                    {
+                        <div class="swiper-slide">
+                            <div class="slider-item">
+                                <img src="~/images/IntroSlider/@Model.IntroSliders.ToArray()[i].Image" class="d-block w-100 slide-imaghe" alt="...">
+                                <div class="slide @(i==0||i==3||i==6||i==9?"slide1":"") @(i==1||i==4||i==7||i==10?"slide2":"") @(i==2||i==5||i==8||i==11?"slide3":"")">
+                                    <img src="~/images/IntroSlider/@Model.IntroSliders.ToArray()[i].SmallImageLogo" style="width: auto;" alt="">
+                                    <div class="content">
+                                        <h2>@Model.IntroSliders.ToArray()[i].Title</h2>
+                                        <p>@Model.IntroSliders.ToArray()[i].Subtitle</p>
+                                        <a asp-controller="Shop" asp-action="index" class="viewshopAbutton buynow">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="swiper-button-intro swiper-button-next"></div>
+                <div class="swiper-button-intro swiper-button-prev"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="maker" style="background-image: url(../images/MainHJome/@Model.Home.UpgradeLatestImage )";>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="maker">
+                <div class="content col-lg-6">
+                    <h2>@Model.Home.UpgradeLatestHeader</h2>
+                    <h4>Message from Wine Maker</h4>
+                    <p>
+                        @Model.Home.UpgradeLatestText
+                    </p>
+                    <a asp-controller="shop" asp-action="index" class="viewmore">View More</a>
+                    <img src="~/images/MainHJome/@Model.Home.UpgradeLatestSignImage" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="special">
+    <div class="container">
+        <div class="row special">
+            <div class="left col-lg-6">
+                <img src="~/images/MainHJome/@Model.Home.SpecialImage" alt="">
+            </div>
+            <div class="right col-lg-6">
+                <h2>@Model.Home.SpecialHeader</h2>
+
+                @foreach (HomeSpecialCards item in Model.HomeSpecialCards)
+                {
+                    <div class="textcard">
+                        <img src="~/images/HomeSpecialCards/@item.CardImage" alt="">
+                        <div class="text">
+                            <h3>@item.CardName</h3>
+                            <p class="content">
+                                @item.CardText
+                            </p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<section id="hurry" style="background-image : url(images/MainHJome/@Model.Home.HurryImage)">
+    <div class="container">
+        <div class="row">
+            <div class="hurry">
+                <h3>@Model.Home.HurryHeader</h3>
+                <h2>Hurry</h2>
+                <h4>@Model.Home.HurrySaleText</h4>
+                <a asp-controller="shop" asp-action="index" class="shopnow">Shop Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="arrival">
+    <div class="container">
+        <div class="row arrival">
+            <div class="header">
+                <h2>@Model.Home.ArrivalHeader</h2>
+                <p>
+                    @Model.Home.ArrivalText
+                </p>
+            </div>
+            <div class="arrivProducts">
+                <ul class="tabs">
+                    <li class="tab-link current" data-tab="tab-1">@Model.Home.ArrivalFeatureBtnText</li>
+                    <li class="tab-link" data-tab="tab-2">@Model.Home.ArrivalNewBtnText</li>
+                    <li class="tab-link" data-tab="tab-3">@Model.Home.ArrivalBestBtnText</li>
+                </ul>
+                <div id="tab-1" class="tab-content current">
+                    <div class="swiper mySwiperTab1">
+                        <div class="swiper-wrapper">
+                            @foreach (Product product in Model.Products.Where(p => p.IsFeatured).Take((int)featuredTake))
+                            {
+                                <div class="swiper-slide">
+                                    <div class="product-card">
+                                        <div class="image">
+                                            @if (product.ProductColorSizes.ElementAt(0).DiscountPrice != 0)
+                                            {
+                                                <div class="sale">Sale</div>
+                                            }
+                                            <div class="overlay">
+                                                <a asp-controller="product" asp-action="detail" asp-route-id="@product.Id" asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId" asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId" class="linktoProddetail"></a>
+                                                <div class="buttons">
+                                                    <div class="heart">
+                                                        @if (User.Identity.IsAuthenticated)
+                                                        {
+                                                            <a asp-controller="home"
+                                                               asp-action="AddToWishlist"
+                                                               asp-route-id="@product.Id"
+                                                               asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                               asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                               class="product-card-icons addtowishlist">
+                                                                <i class="fa-solid fa-heart"></i>
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a asp-controller="account"
+                                                               asp-action="login"
+                                                               class="product-card-icons">
+                                                                <i class="fa-solid fa-heart"></i>
+                                                            </a>}
+                                                    </div>
+                                                    <div class="search" class="product-card-icons">
+                                                        <a asp-controller="home"
+                                                           asp-action="DetailModal"
+                                                           asp-route-id="@product.Id"
+                                                           asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                           asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                           class="product-card-icons">
+                                                            <i class="fa-solid fa-magnifying-glass open-modal"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <img src="~/images/products/@product.MainImage" class="main" alt="">
+                                            <img src="~/images/products/@product.HoverImage" class="hover" alt="">
+                                        </div>
+                                        <div class="content">
+                                            <a asp-controller="home"
+                                                           asp-action="DetailModal"
+                                                           asp-route-id="@product.Id"
+                                                           asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                           asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId" class="prod-name">@product.Name</a>
+                                            @if (product.ProductColorSizes.ElementAt(0).DiscountPrice != 0)
+                                            {
+                                                <div style="display: flex; justify-content: center; align-items: center;">
+                                                    <h3>$@product.ProductColorSizes.ElementAt(0).DiscountPrice</h3>
+                                                    <del style="margin: 0 10px;color: #80808091;font-family: Text Me One, sans-serif;font-weight: 700;">$@product.ProductColorSizes.ElementAt(0).Price</del>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <h3>$@product.ProductColorSizes.ElementAt(0).Price</h3>
+                                            }
+                                            @if (product.ProductColorSizes.ElementAt(0).StockCount < 1)
+                                            {
+                                                <a href="#"
+                                                   data-toggle="tooltip" title="Add To Cart" class="default-link outofstock viewshopAbutton">
+                                                    <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="home" asp-action="AddToBasket"
+                                                   asp-route-id="@product.Id"
+                                                   asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                   asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                   data-toggle="tooltip" title="Add To Cart" class="addtocart">
+                                                    <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                                                </a>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="swiper-wrapper">
+                            @foreach (Product product in Model.Products.Where(p => p.IsFeatured).Skip((int)featuredTake))
+                            {
+                                foreach (ProductColorSize productColorSize in product.ProductColorSizes)
+                                {
+                                    <div class="swiper-slide">
+                                        <div class="product-card">
+                                            <div class="image">
+                                                @if (productColorSize.DiscountPrice != 0)
+                                                {
+                                                    <div class="sale">Sale</div>
+                                                }
+                                                <div class="overlay">
+                                                    <a asp-controller="product" asp-action="detail" asp-route-id="@product.Id" asp-route-colorid="@productColorSize.ColorId" asp-route-sizeid="@productColorSize.SizeId" class="linktoProddetail"></a>
+                                                    <div class="buttons">
+                                                        <div class="heart">
+                                                            @if (User.Identity.IsAuthenticated)
+                                                            {
+                                                                <a asp-controller="home"
+                                                                   asp-action="AddToWishlist"
+                                                                   asp-route-id="@product.Id"
+                                                                   asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                                   asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                                   class="product-card-icons addtowishlist">
+                                                                    <i class="fa-solid fa-heart"></i>
+                                                                </a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a asp-controller="account"
+                                                                   asp-action="login"
+                                                                   class="product-card-icons">
+                                                                    <i class="fa-solid fa-heart"></i>
+                                                                </a>
+                                                            }
+                                                        </div>
+                                                        <div class="search">
+                                                            <a asp-controller="home"
+                                                               asp-action="DetailModal"
+                                                               asp-route-id="@product.Id"
+                                                               asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                               asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                               class="product-card-icons">
+                                                                <i class="fa-solid fa-magnifying-glass open-modal"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <img src="~/images/products/@product.MainImage" class="main" alt="">
+                                                <img src="~/images/products/@product.HoverImage" class="hover" alt="">
+                                            </div>
+                                            <div class="content">
+                                                <a asp-controller="home"
+                                                           asp-action="DetailModal"
+                                                           asp-route-id="@product.Id"
+                                                           asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                           asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId" class="prod-name">@product.Name</a>
+                                                @if (productColorSize.DiscountPrice != 0)
+                                                {
+                                                    <div style="display: flex; justify-content: center; align-items: center;">
+                                                        <h3>$@productColorSize.DiscountPrice</h3>
+                                                        <del style="margin: 0 10px;color: #80808091;font-family: Text Me One, sans-serif;font-weight: 700;">$@productColorSize.Price</del>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <h3>$@productColorSize.Price</h3>
+                                                }
+                                                @if (productColorSize.StockCount < 1)
+                                                {
+                                                    <a href="#"
+                                                       data-toggle="tooltip" title="Add To Cart" class="default-link outofstock viewshopAbutton">
+                                                        <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a asp-controller="home" asp-action="AddToBasket"
+                                                       asp-route-id="@product.Id"
+                                                       asp-route-colorid="@productColorSize.ColorId"
+                                                       asp-route-sizeid="@productColorSize.SizeId"
+                                                       data-toggle="tooltip" title="Add To Cart" class="addtocart">
+                                                        <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                                                    </a>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="swiper-button-next swiper-button-next-t1"></div>
+                    <div class="swiper-button-prev swiper-button-prev-t1"></div>
+                </div>
+                <div id="tab-2" class="tab-content">
+                    <div class="swiper mySwiperTab2">
+                        <div class="swiper-wrapper">
+                            @foreach (Product product in Model.Products.Where(p => p.IsNewArrival).Take((int)newTake))
+                            {
+                                <div class="swiper-slide">
+                                    <div class="product-card">
+                                        <div class="image">
+                                            @if (product.ProductColorSizes.ElementAt(0).DiscountPrice != 0)
+                                            {
+                                                <div class="sale">Sale</div>
+                                            }
+                                            <div class="overlay">
+                                                <a asp-controller="product" asp-action="detail" asp-route-id="@product.Id" asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId" asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId" class="linktoProddetail"></a>
+                                                <div class="buttons">
+                                                    <div class="heart">
+                                                        @if (User.Identity.IsAuthenticated)
+                                                        {
+                                                            <a asp-controller="home"
+                                                               asp-action="AddToWishlist"
+                                                               asp-route-id="@product.Id"
+                                                               asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                               asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                               class="product-card-icons addtowishlist">
+                                                                <i class="fa-solid fa-heart"></i>
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a asp-controller="account"
+                                                               asp-action="login"
+                                                               class="product-card-icons">
+                                                                <i class="fa-solid fa-heart"></i>
+                                                            </a>}
+                                                    </div>
+                                                    <div class="search" class="product-card-icons">
+                                                        <a asp-controller="home"
+                                                           asp-action="DetailModal"
+                                                           asp-route-id="@product.Id"
+                                                           asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                           asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                           class="product-card-icons">
+                                                            <i class="fa-solid fa-magnifying-glass open-modal"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <img src="~/images/products/@product.MainImage" class="main" alt="">
+                                            <img src="~/images/products/@product.HoverImage" class="hover" alt="">
+                                        </div>
+                                        <div class="content">
+                                            <a asp-controller="home"
+                                                           asp-action="DetailModal"
+                                                           asp-route-id="@product.Id"
+                                                           asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                           asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId" class="prod-name">@product.Name</a>
+                                            @if (product.ProductColorSizes.ElementAt(0).DiscountPrice != 0)
+                                            {
+                                                <div style="display: flex; justify-content: center; align-items: center;">
+                                                    <h3>$@product.ProductColorSizes.ElementAt(0).DiscountPrice</h3>
+                                                    <del style="margin: 0 10px;color: #80808091;font-family: Text Me One, sans-serif;font-weight: 700;">$@product.ProductColorSizes.ElementAt(0).Price</del>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <h3>$@product.ProductColorSizes.ElementAt(0).Price</h3>
+                                            }
+                                            @if (product.ProductColorSizes.ElementAt(0).StockCount < 1)
+                                            {
+                                                <a href="#"
+                                                   data-toggle="tooltip" title="Add To Cart" class="default-link outofstock viewshopAbutton">
+                                                    <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="home" asp-action="AddToBasket"
+                                                   asp-route-id="@product.Id"
+                                                   asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                   asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                   data-toggle="tooltip" title="Add To Cart" class="addtocart">
+                                                    <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                                                </a>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="swiper-wrapper">
+                            @foreach (Product product in Model.Products.Where(p => p.IsNewArrival).Skip((int)newTake))
+                            {
+                                <div class="swiper-slide">
+                                    <div class="product-card">
+                                        <div class="image">
+                                            @if (product.ProductColorSizes.ElementAt(0).DiscountPrice != 0)
+                                            {
+                                                <div class="sale">Sale</div>
+                                            }
+                                            <div class="overlay">
+                                                <a asp-controller="product" asp-action="detail" asp-route-id="@product.Id" asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId" asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId" class="linktoProddetail"></a>
+                                                <div class="buttons">
+                                                    <div class="heart">
+                                                        @if (User.Identity.IsAuthenticated)
+                                                        {
+                                                            <a asp-controller="home"
+                                                               asp-action="AddToWishlist"
+                                                               asp-route-id="@product.Id"
+                                                               asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                               asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                               class="product-card-icons addtowishlist">
+                                                                <i class="fa-solid fa-heart"></i>
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a asp-controller="account"
+                                                               asp-action="login"
+                                                               class="product-card-icons">
+                                                                <i class="fa-solid fa-heart"></i>
+                                                            </a>
+                                                        }
+                                                    </div>
+                                                    <div class="search" class="product-card-icons">
+                                                        <a asp-controller="home"
+                                                           asp-action="DetailModal"
+                                                           asp-route-id="@product.Id"
+                                                           asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                           asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                           class="product-card-icons">
+                                                            <i class="fa-solid fa-magnifying-glass open-modal"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <img src="~/images/products/@product.MainImage" class="main" alt="">
+                                            <img src="~/images/products/@product.HoverImage" class="hover" alt="">
+                                        </div>
+                                        <div class="content">
+                                            <a asp-controller="home"
+                                                           asp-action="DetailModal"
+                                                           asp-route-id="@product.Id"
+                                                           asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                           asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId" class="prod-name">@product.Name</a>
+                                            @if (product.ProductColorSizes.ElementAt(0).DiscountPrice != 0)
+                                            {
+                                                <div style="display: flex; justify-content: center; align-items: center;">
+                                                    <h3>$@product.ProductColorSizes.ElementAt(0).DiscountPrice</h3>
+                                                    <del style="margin: 0 10px;color: #80808091;font-family: Text Me One, sans-serif;font-weight: 700;">$@product.ProductColorSizes.ElementAt(0).Price</del>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <h3>$@product.ProductColorSizes.ElementAt(0).Price</h3>
+                                            }
+                                            @if (product.ProductColorSizes.ElementAt(0).StockCount < 1)
+                                            {
+                                                <a href="#"
+                                                   data-toggle="tooltip" title="Add To Cart" class="default-link outofstock viewshopAbutton">
+                                                    <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="home" asp-action="AddToBasket"
+                                                   asp-route-id="@product.Id"
+                                                   asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                   asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                   data-toggle="tooltip" title="Add To Cart" class="addtocart">
+                                                    <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                                                </a>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="swiper-button-next swiper-button-next-t2"></div>
+                    <div class="swiper-button-prev swiper-button-prev-t2"></div>
+                </div>
+                <div id="tab-3" class="tab-content">
+                    <div class="swiper mySwiperTab3">
+                        <div class="swiper-wrapper">
+                            @foreach (Product product in Model.Products.Where(p => p.IsBestseller).Take((int)BestTake))
+                            {
+                                <div class="swiper-slide">
+                                    <div class="product-card">
+                                        <div class="image">
+                                            @if (product?.ProductColorSizes != null)
+                                            {
+                                                @if (product?.ProductColorSizes?.ElementAt(0)?.DiscountPrice != 0)
+                                                {
+                                                    <div class="sale">Sale</div>
+                                                }
+                                            }
+                                            <div class="overlay">
+                                                <a asp-controller="product" asp-action="detail" asp-route-id="@product.Id" asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId" asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId" class="linktoProddetail"></a>
+                                                <div class="buttons">
+                                                    <div class="heart">
+                                                        @if (User.Identity.IsAuthenticated)
+                                                        {
+                                                            <a asp-controller="home"
+                                                               asp-action="AddToWishlist"
+                                                               asp-route-id="@product.Id"
+                                                               asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                               asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                               class="product-card-icons addtowishlist">
+                                                                <i class="fa-solid fa-heart"></i>
+                                                            </a> }
+                                                        else
+                                                        {
+                                                            <a asp-controller="account"
+                                                               asp-action="login"
+                                                               class="product-card-icons">
+                                                                <i class="fa-solid fa-heart"></i>
+                                                            </a>}
+                                                    </div>
+                                                    <div class="search" class="product-card-icons">
+                                                        <a asp-controller="home"
+                                                           asp-action="DetailModal"
+                                                           asp-route-id="@product.Id"
+                                                           asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                           asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                           class="product-card-icons">
+                                                            <i class="fa-solid fa-magnifying-glass open-modal"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <img src="~/images/products/@product.MainImage" class="main" alt="">
+                                            <img src="~/images/products/@product.HoverImage" class="hover" alt="">
+                                        </div>
+                                        <div class="content">
+                                            <a asp-controller="home"
+                                                           asp-action="DetailModal"
+                                                           asp-route-id="@product.Id"
+                                                           asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                           asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId" class="prod-name">@product.Name</a>
+                                            @if (product.ProductColorSizes.ElementAt(0).DiscountPrice != 0)
+                                            {
+                                                <div style="display: flex; justify-content: center; align-items: center;">
+                                                    <h3>$@product.ProductColorSizes.ElementAt(0).DiscountPrice</h3>
+                                                    <del style="margin: 0 10px;color: #80808091;font-family: Text Me One, sans-serif;font-weight: 700;">$@product.ProductColorSizes.ElementAt(0).Price</del>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <h3>$@product.ProductColorSizes.ElementAt(0).Price</h3>
+                                            }
+                                            @if (product.ProductColorSizes.ElementAt(0).StockCount < 1)
+                                            {
+                                                <a href="#"
+                                                   data-toggle="tooltip" title="Add To Cart" class="default-link outofstock viewshopAbutton">
+                                                    <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="home" asp-action="AddToBasket"
+                                                   asp-route-id="@product.Id"
+                                                   asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                   asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                   data-toggle="tooltip" title="Add To Cart" class="addtocart">
+                                                    <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                                                </a>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="swiper-wrapper">
+                            @foreach (Product product in Model.Products.Where(p => p.IsBestseller).Skip((int)BestTake))
+                            {
+                                <div class="swiper-slide">
+                                    <div class="product-card">
+                                        <div class="image">
+                                            @if (product.ProductColorSizes.ElementAt(0).DiscountPrice != 0)
+                                            {
+                                                <div class="sale">Sale</div>
+                                            }
+                                            <div class="overlay">
+                                                <a asp-controller="product" asp-action="detail" asp-route-id="@product.Id" asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId" asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId" class="linktoProddetail"></a>
+                                                <div class="buttons">
+                                                    <div class="heart">
+                                                        @if (User.Identity.IsAuthenticated)
+                                                        {
+                                                            <a asp-controller="home"
+                                                               asp-action="AddToWishlist"
+                                                               asp-route-id="@product.Id"
+                                                               asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                               asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                               class="product-card-icons addtowishlist">
+                                                                <i class="fa-solid fa-heart"></i>
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a asp-controller="account"
+                                                               asp-action="login"
+                                                               class="product-card-icons">
+                                                                <i class="fa-solid fa-heart"></i>
+                                                            </a>
+                                                        }
+                                                    </div>
+                                                    <div class="search" class="product-card-icons">
+                                                        <a asp-controller="home"
+                                                           asp-action="DetailModal"
+                                                           asp-route-id="@product.Id"
+                                                           asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                           asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                           class="product-card-icons">
+                                                            <i class="fa-solid fa-magnifying-glass open-modal"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <img src="~/images/products/@product.MainImage" class="main" alt="">
+                                            <img src="~/images/products/@product.HoverImage" class="hover" alt="">
+                                        </div>
+                                        <div class="content">
+                                            <a asp-controller="home"
+                                                           asp-action="DetailModal"
+                                                           asp-route-id="@product.Id"
+                                                           asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                           asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId" class="prod-name">@product.Name</a>
+                                            @if (product.ProductColorSizes.ElementAt(0).DiscountPrice != 0)
+                                            {
+                                                <div style="display: flex; justify-content: center; align-items: center;">
+                                                    <h3>$@product.ProductColorSizes.ElementAt(0).DiscountPrice</h3>
+                                                    <del style="margin: 0 10px;color: #80808091;font-family: Text Me One, sans-serif;font-weight: 700;">$@product.ProductColorSizes.ElementAt(0).Price</del>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <h3>$@product.ProductColorSizes.ElementAt(0).Price</h3>
+                                            }
+                                            @if (product.ProductColorSizes.ElementAt(0).StockCount < 1)
+                                            {
+                                                <a href="#"
+                                                   data-toggle="tooltip" title="Add To Cart" class="default-link outofstock viewshopAbutton">
+                                                    <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="home" asp-action="AddToBasket"
+                                                   asp-route-id="@product.Id"
+                                                   asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                   asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                   data-toggle="tooltip" title="Add To Cart" class="addtocart">
+                                                    <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                                                </a>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="swiper-button-next swiper-button-next-t3"></div>
+                    <div class="swiper-button-prev swiper-button-prev-t3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="gallery">
+    <div class="container-fluid">
+        <div class="header">
+            <h2>@Model.Home.GalleryHeader</h2>
+            <p>
+                @Model.Home.GalleryText
+            </p>
+        </div>
+        <div class="row gallery">
+            @foreach (HomeGallery item in Model.HomeGalleries)
+            {
+                <div class="gallery-card col-sm-12 col-md-6 col-xl-3 col-lg-6">
+                    <div class="overlay">
+                        <h3>@item.Title</h3>
+                        <h4>@item.Category.Name</h4>
+                        <a asp-controller="shop" asp-action="Index" class="viewshopAbutton view">View collection</a>
+                    </div>
+                    <div class="image"><img src="~/images/HomeGalleries/@item.Image" alt=""></div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<section id="featured">
+    <div class="container-fluid">
+        <div class="header">
+            <h2>@Model.Home.featuredProdsHeader</h2>
+            <p>
+                @Model.Home.featuredProdsText
+            </p>
+        </div>
+        <div class="row featured-products">
+            @foreach (var item in Model.Products.Where(p => p.IsFeatured).OrderByDescending(p => p.CreatedAt).Take(5))
+            {
+                <a asp-controller="shop" asp-action="Index" class="featured-card col-xs-12 col-lg-6 col-xl-2">
+                    <div class="image"><img src="~/images/products/@item.MainImage" alt=""></div>
+                    <span class="feature-link" style=" white-space: nowrap; overflow: hidden;">@item.Name.ToUpper()</span>
+                </a>
+            }
+        </div>
+    </div>
+</section>
+<section id="counter-home">
+    <div class="container-fluid">
+        <div class="row counter">
+            @foreach (HomeCounts item in Model.HomeCounts)
+            {
+                <div class="counter-card col-md-6 col-xl-3 col-lg-6">
+                    <div class="image" style="border-bottom: 2px solid #c1001c;"><img src="~/images/HomeCounts/@item.CountsImage" alt=""></div>
+                    <div class="content">
+                        <h4>@item.CountsText</h4>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<section id="clients">
+    <div class="container-fluid">
+        <div class="header">
+            <h2>@Model.Home.OurClientsHeader</h2>
+            <p>
+                @Model.Home.OurClientsText
+            </p>
+        </div>
+        <div class="row clients">
+            <div class="swiper mySwiper2">
+                <div class="swiper-wrapper">
+                    @foreach (HomeOurClientsSlider item in Model.HomeOurClientsSliders)
+                    {
+                        <div class="swiper-slide">
+                            <div class="clients-card">
+                                <img src="~/images/HomeOurClientsSliders/@item.Image" alt="">
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section>
+
+@section Script{
+<script>
+    $(document).on("click", ".subscriber", function (e) {
+        e.preventDefault();
+
+        //const formData = new FormData();
+        //if ($(".emailValue").is(':valid')) {
+        //    formData.append("email", $(".emailValue").val());
+        //    formData.append("__RequestVerificationToken", $("input[name='__RequestVerificationToken']").val());
+        //}
+        var emailText = $(".subsEmail").val().trim();
+        fetch("home/subscriber" + "?email=" + emailText).then(res => {
+            return res.json();
+        }).then(data => {
+            if (data.status === 200) {
+                $(".overlay-first-modal").css({
+                    "opacity": "0",
+                    "visibility": "hidden",
+                    "z-index": "-10"
+                })
+                $(".first-modal").css({
+                    "opacity": "0",
+                    "visibility": "hidden",
+                    "z-index": "-10"
+                })
+
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: `We send email to ${emailText}.`,
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                localStorage.setItem("modal", JSON.stringify("modal"));
+            } else {
+                $(".overlay-first-modal").css({
+                    "opacity": "0",
+                    "visibility": "hidden",
+                    "z-index": "-10"
+                })
+                $(".first-modal").css({
+                    "opacity": "0",
+                    "visibility": "hidden",
+                    "z-index": "-10"
+                })
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: `This ${emailText} already subscribed.`,
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
+        })
+    })
+</script>
+}

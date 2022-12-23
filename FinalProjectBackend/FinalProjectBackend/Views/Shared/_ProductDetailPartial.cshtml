@@ -1,0 +1,28 @@
+﻿@model ProductVM
+<div class="row prodDetail">
+    <div class="left-prod-det col-lg-6">
+        <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
+             class="swiper mySwiperBigImg">
+            <div class="swiper-wrapper">
+                @foreach (ProductColorSize productImage in Model.Product?.ProductColorSizes)
+                {
+    <div class="swiper-slide image-b" style="justify-content: center;">
+        <img src="~/images/products/@productImage?.Image" />
+    </div>}
+            </div>
+        </div>
+        <div thumbsSlider="" class="swiper mySwiperSmallImg">
+            <div class="swiper-wrapper" style="justify-content: flex-start;">
+                @foreach (ProductColorSize productImage in Model.Product?.ProductColorSizes)
+                {
+                <div class="swiper-slide col" style="text-align: center;">
+                    <img style="margin: 0px;width: inherit;" src="~/images/products/@productImage?.Image" />
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="rightPartial col-lg-6">
+        @await Html.PartialAsync("_ProductDetailRightPartial", Model)
+    </div>
+</div>

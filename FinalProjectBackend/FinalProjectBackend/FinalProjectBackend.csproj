@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20220610162019_CorrectiononBasketVMAndBasket.cs" />
+    <Compile Remove="Migrations\20220610162019_CorrectiononBasketVMAndBasket.Designer.cs" />
+    <Compile Remove="Migrations\20220619142515_ProductImageCorrection.cs" />
+    <Compile Remove="Migrations\20220619142515_ProductImageCorrection.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.25">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Manage\Data\" />
+    <Folder Include="Areas\Manage\Models\" />
+    <Folder Include="wwwroot\images\blogs\" />
+    <Folder Include="wwwroot\images\IntroSlider\" />
+    <Folder Include="wwwroot\images\AboutPage\" />
+    <Folder Include="wwwroot\images\MainHJome\" />
+    <Folder Include="wwwroot\images\HomeSpecialCards\" />
+    <Folder Include="wwwroot\images\HomeOurClientsSliders\" />
+    <Folder Include="wwwroot\images\HomeCounts\" />
+    <Folder Include="wwwroot\images\HomeGalleries\" />
+    <Folder Include="wwwroot\images\Categories\" />
+    <Folder Include="wwwroot\images\products\" />
+    <Folder Include="wwwroot\images\products\" />
+  </ItemGroup>
+
+</Project>

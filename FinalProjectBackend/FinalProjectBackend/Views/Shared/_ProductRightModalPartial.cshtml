@@ -1,0 +1,116 @@
+﻿@model ProductVM
+@{ double stars = Model.Reviews.Sum(p=>p.Star);
+    double reCount = Model.Reviews.Count();
+    double starCount = stars / reCount;
+    if (double.IsNaN(starCount))
+    {
+        starCount = 0;
+    }
+    }
+<div class="content">
+    <h2>@Model.Product.Name</h2>
+    
+    <div class="icons-product">
+        @if (stars != 0 && reCount != 0)
+        {
+    @for (int i = 0; i < Math.Floor(starCount); i++)
+    {
+    <i class="fa-solid fa-star"></i>}
+                    @if ((starCount - Math.Floor(starCount)) > 0 && (starCount - Math.Floor(starCount)) < 1)
+                    {
+    <i class="fa-solid fa-star-half-stroke"></i>}
+       
+        }
+         @for (int i = 0; i < 5-Math.Ceiling(starCount); i++)
+        {
+            <i class="fa-solid fa-star" style="color: grey;"></i>
+        }
+    </div>
+    <form action="" id="product-detail-form">
+        <div class="formElem price">
+            <span>Price:</span>
+            @if (ViewBag.DisPrice == null && ViewBag.Price == null)
+            {
+<span class="price-value unavailable">Unavailable</span> }
+else if (ViewBag.DisPrice == 0)
+{
+<span class="price-value productPriceVal"> $@ViewBag.Price.ToString("0.00")</span> }
+else
+{
+<span class="price-value productPriceVal"> $@ViewBag.DisPrice.ToString("0.00") <del>$@ViewBag.Price.ToString("0.00")</del></span>}
+        </div>
+        <div class="formElem formElems sizesm" style=" display: flex; justify-content: start; align-items: center;">
+            <span>Size:</span>
+            @for (int i = 0; i < Model.Product.ProductColorSizes.Count(); i++)
+            {
+                if (Model.Product.ProductColorSizes.ToArray()[i].SizeId == ViewBag.SizeId)
+                {
+<a href="" class="sizem active-det" data-size="@Model.Product.ProductColorSizes[i].SizeId" data-id="@Model.Product.Id">@Model.Product.ProductColorSizes[i].Size.Name</a> }
+else
+{
+<a href="" class="sizem" data-size="@Model.Product.ProductColorSizes[i].SizeId" data-id="@Model.Product.Id">@Model.Product.ProductColorSizes[i].Size.Name</a>}
+}
+        </div>
+        <div class="formElem formElems colorsm" style=" display: flex; justify-content: start; align-items: center;">
+            <span>Color:</span>
+            @for (int i = 0; i < Model.Product.ProductColorSizes.Count(); i++)
+            {
+                if (Model.Product.ProductColorSizes.ToArray()[i].ColorId == ViewBag.ColorId)
+                {
+<a href="" class="colorm active-det" data-color="@Model.Product.ProductColorSizes[i].ColorId" data-id="@Model.Product.Id" style=" padding: 0px 0px 5px 5px; overflow: hidden;">
+    <img src="~/images/products/@Model.Product.ProductColorSizes[i]?.Image" />
+</a> }
+else
+{
+<a href="" class="colorm" data-color="@Model.Product.ProductColorSizes[i].ColorId" data-id="@Model.Product.Id" style=" padding: 0px 0px 5px 5px; overflow: hidden;">
+    <img src="~/images/products/@Model.Product.ProductColorSizes[i]?.Image" />
+</a>}
+}
+
+        </div>
+        <div class="formElem speciality">
+            <span>Specialty:</span>
+            <div>
+                <a asp-controller="product" asp-action="toTagCatSpeVen" asp-route-which="Speciality" asp-route-whichId="@Model.Product.Speciality.Id">@Model.Product.Speciality.Name</a>
+            </div>
+        </div>
+        <div class="formElem vendor">
+            <span>Vendor:</span>
+            <a asp-controller="product" asp-action="toTagCatSpeVen" asp-route-which="Vendor" asp-route-whichId="@Model.Product.Vendor.Id">@Model.Product.Vendor.Name</a>
+        </div>
+        <div class="formElem type">
+            <span>Type:</span>
+            <a asp-controller="product" asp-action="toTagCatSpeVen" asp-route-which="Category" asp-route-whichId="@Model.Product.Category.Id">@Model.Product.Category.Name</a>
+        </div>
+        <div class="formElem type">
+            <span>Availability:</span>
+            <span style="color:@((ViewBag.ProdCount == 0 || ViewBag.ProdCount == null)?"#c1001c":"green")">@((ViewBag.ProdCount == 0 || ViewBag.ProdCount == null) ? "Out of stock":"In Stock")</span>
+        </div>
+        <div class="formElem quantity">
+            <span>Quantity:</span>
+            <div class="count">
+                <a href="" class="pdec">-</a>
+                <input type="text" class="prod-count prodDetailCount" data-productCount="@ViewBag.ProdCount" value="1">
+                <a href="" class="pinc">+</a>
+            </div>
+        </div>
+
+        @if (ViewBag.DisPrice == null && ViewBag.Price == null)
+        {
+<a href="" class="viewshopAbutton">Sold Out</a> }
+else
+{
+if (ViewBag.StockCount == null || ViewBag.StockCount == 0)
+{
+<a href="" class="viewshopAbutton default-link outofstock">Add to Cart</a> }
+else
+{
+<a asp-controller="home" asp-action="AddToBasket"
+   asp-route-id="@Model.Product.Id"
+   asp-route-colorid="@ViewBag.ColorId"
+   asp-route-sizeid="@ViewBag.SizeId"
+   class="viewshopAbutton detail-btns addbasketfromPD">Add to Cart</a>}
+}
+        <a href="" class="viewshopAbutton detail-btns">Add to wishlist</a>
+    </form>
+</div>

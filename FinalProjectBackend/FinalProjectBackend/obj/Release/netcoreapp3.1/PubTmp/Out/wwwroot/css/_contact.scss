@@ -1,0 +1,124 @@
+$primary-font-family : 'Text Me One', sans-serif;
+$second-font-family : 'Philosopher', sans-serif;
+$primary-color : #c1001c;
+$second-red-color : #f01737;
+$button-hover-color : #d2aa5c;
+#contact-cards{
+    padding: 60px 0;
+    .contact-cards{
+        justify-content: space-evenly;
+        padding: 0 30px;
+        .contact-card{
+            border: 1px solid #e4e4e4;
+            padding: 25px;
+            transition: all 0.3s linear;
+            .icon{
+                background: #000000;
+                color: #ffffff;
+                display: inline-block;
+                border-radius: 50%;
+                font-size: 20px;
+                height: 50px;
+                line-height: 50px;
+                position: relative;
+                text-align: center;
+                width: 50px;
+                transition: all 0.3s linear;
+                i{
+
+                }
+            }
+            h3{
+                font-family: $second-font-family;
+                font-size: 22px;
+                margin: 35px 0 15px;
+            }
+            p{
+                font-family: $primary-font-family;
+                font-size: 16px;
+                margin: 5px 0px;
+                span{
+                    font-weight: 700;
+                    margin: 0 5px;
+                }
+            }
+            &:hover{
+                border: 1px solid $button-hover-color;
+                transition: all 0.3s linear;
+                .icon{
+                    background-color: $button-hover-color;
+                }
+            }
+        }
+    }
+}
+#contact-form{
+    .contact-form{
+        .left{
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            iframe{
+                height: 90%;
+            }
+        }
+        .right{
+            .contact{
+                padding-top: 10px;
+                h2{
+                    font-family: $second-font-family;
+                    font-size: 24px;
+                }
+                #contactForm{
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    flex-direction: column;
+                    input{
+                        display: block;
+                        margin: 15px 0;
+                        width: 100%;
+                        padding: 10px 20px;
+                        border: 1px solid #e4e4e4;
+                        transition: all 0.3s linear;
+                        &::placeholder{
+                            font-family: $primary-font-family;
+                            font-size: 16px;
+                            color: #9c9c9c;
+                        }
+                        &:focus{
+                            border-color: $primary-color;
+                            transition: all 0.3s linear;
+                        }
+                    }
+                    textarea{
+                        display: block;
+                        width: 100%;
+                        padding: 10px 20px;
+                        border: 1px solid #e4e4e4;
+                        margin: 15px 0;
+                        overflow: auto;
+                        resize: vertical;
+                        resize: block;
+                        vertical-align: top;
+                        min-height: 150px;
+                        transition: all 0.3s linear;
+                        &::placeholder{
+                            font-family: $primary-font-family;
+                            font-size: 16px;
+                            color: #9c9c9c;
+                        }
+                        &:focus{
+                            border-color: $primary-color;
+                            transition: all 0.3s linear;
+                        }
+                    }
+                    .send{
+                        padding: 7px 70px;
+                        margin-top: 25px;
+                    }
+                }
+            }
+        }
+    }
+}

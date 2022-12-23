@@ -1,0 +1,62 @@
+﻿@model List<BasketVM>
+@{
+    string color = "";
+    string size = "";
+    string category = "";
+
+
+    double subTotal = 0;
+    double tax = 0;
+    double total = 0;
+    foreach (var item in Model)
+    {
+        total += (item.Price * item.Count) + (item.ExTax * item.Count);
+    }
+}
+@if (Model.Count() > 0)
+{
+    @foreach (BasketVM basket in Model)
+    {
+        subTotal += basket.Count * basket.Price;
+        <div class="basket-card row">
+            <a asp-controller="Basket" asp-action="DeleteBasket" asp-route-id="@basket.ProductId" asp-route-color="@basket.ColorId" asp-route-size="@basket.SizeId" style="color: white;" class="remove-icon deletebasket">
+                <i class="fa-solid fa-xmark"></i>
+            </a>
+            <div class="left-card col-lg-3">
+                <a asp-controller="product" asp-action="detail" asp-route-id="@basket.ProductId" asp-route-colorid="@basket.ColorId" asp-route-sizeid="@basket.SizeId" class="image">
+                    <img src="~/images/products/@basket.Image" alt="">
+                </a>
+            </div>
+            <div class="right-card col-lg-9">
+                <div class="content">
+                    <a href="~/" class="prod-name">@basket.Name</a>
+                    <ul class="prod-elements">
+                        <li class="size">@basket.ColorName</li>
+                        <li class="color">@basket.SizeName</li>
+                    </ul>
+                    <div class="price">
+                        <span>$ @basket.Price</span>
+                    </div>
+                    <div class="count">
+                        <a href="~/" class="dec">-</a>
+                        <input type="text" class="prod-count forHeaderBasket" data-id="@basket.ProductId" data-productCount="@basket.StockCount" data-color="@basket.ColorId" data-size="@basket.SizeId" value="@basket.Count">
+                        <a href="~/" class="inc">+</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="total">
+        <span>Total</span>
+        <span>$@subTotal.ToString("0.00")</span>
+    </div>
+    <hr>
+    <p>Shipping, taxes, and discounts will be calculated at checkout.</p>
+    <a asp-controller="order" asp-action="create" class="proceed viewshopAbutton">Proceed to Checkout</a>
+    <a asp-controller="basket" asp-action="index" class="cart viewshopAbutton">View Cart </a>
+}
+else
+{
+<p style="font-family: 'Text me one';font-size: 16px;">Your cart is currently empty.</p>
+<a asp-controller="shop" asp-action="index" class="viewshopAbutton" style="width: 100%;">Continue Shopping</a>
+}

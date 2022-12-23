@@ -1,0 +1,18 @@
+﻿@model List<BasketVM>
+<section id="aboutus">
+    <div class="container-fluid">
+        <div class="row aboutus">
+            <div class="content">
+                <h2>YOUR SHOPPING CART</h2>
+                <h3>Home / Your Shopping Cart</h3>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="basket">
+    <div class="container">
+        <div class="row basket basketContainer">
+            @await Html.PartialAsync("_BasketIndexPartial", Model)
+        </div>
+        </div>
+</section>

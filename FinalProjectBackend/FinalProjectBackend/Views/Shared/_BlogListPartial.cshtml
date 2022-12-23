@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Blog>
+@{ string tags = ""; }
+<style>
+
+    .pagination .page-item.active .page-link-blog {
+        background-color: #cc0033;
+        border: 1px solid black;
+        color: white;
+    }
+
+    .page-link-blog {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        color: black;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+    }
+</style>
+
+
+                <div class="blogs row">
+                    @if (Model.Count() > 0)
+                    {
+                foreach (Blog blog in Model)
+                {
+                    tags = string.Join(", ", blog.BlogTags.Select(p => p.Tag != null ? p.Tag.Name : ""));
+                <div class="blog col-lg-6" style="position: relative;">
+                    <a asp-controller="blog" asp-action="detail" asp-route-bid="@blog.Id" style="position: absolute;width: 100%;height: 100%;top: 0px;left: 0px;"></a>
+                    <div class="top">
+                        <div class="image"><img src="~/images/blogs/@blog.Image" alt=""></div>
+                    </div>
+                    <div class="bottom">
+                        <ul class="blog-tags">
+                            <li>
+                                <i class="fa-solid fa-user"></i>By @blog.Publisher
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-calendar-days"></i>@blog.CreatedAt.ToString()
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-comments"></i>1 Comment
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-tags"></i>@tags
+                            </li>
+                        </ul>
+                        <a href="" class="blog-detail-head">@blog.Title</a>
+                        <p class="blog-detail-text">
+                            @blog.Description.ToString().Substring(0, 100)...
+                        </p>
+                        <a href="" class="viewshopAbutton">Read More</a>
+                    </div>
+                </div>} }
+                            else
+                            {
+                                <p><i style="font-family: 'Text Me One'">We have no blogs for your tag. This placeholder will appear until we add a blog for this tag.</i></p>
+                            }
+                </div>
+                <div class="col-lg-12 d-flex justify-content-center">
+                    <nav>
+                        <ul class="pagination">
+
+                            @if (ViewBag.PageIndex > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link-blog" data-page="1" aria-label="Previous">
+                                        @("<<")
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link-blog" data-page="@(ViewBag.PageIndex-1)" aria-label="Previous">
+                                        @("<")
+                                    </a>
+                                </li>
+                                @if (ViewBag.PageIndex == ViewBag.PageCount && ViewBag.PageIndex > 2)
+                                {
+                                    <li class="page-item"><a class="page-link-blog" asp-action="index" data-page="@(ViewBag.PageIndex-2)">@(ViewBag.PageIndex-2)</a></li>
+                                }
+                                <li class="page-item"><a class="page-link-blog" data-page="@(ViewBag.PageIndex-1)">@(ViewBag.PageIndex-1)</a></li>
+                            }
+
+                            <li class="page-item active"><a class="page-link-blog"data-page="@ViewBag.PageIndex">@ViewBag.PageIndex</a></li>
+
+                            @if (ViewBag.PageIndex < ViewBag.PageCount)
+                            {
+                                <li class="page-item"><a class="page-link-blog"data-page="@(ViewBag.PageIndex + 1)">@(ViewBag.PageIndex + 1)</a></li>
+
+                                @if (ViewBag.PageIndex == 1 && (ViewBag.PageIndex + 2) < ViewBag.PageCount)
+                                {
+                                    <li class="page-item"><a class="page-link-blog" data-page="@(ViewBag.PageIndex+2)">@(ViewBag.PageIndex+2)</a></li>
+                                }
+                                <li class="page-item">
+                                    <a class="page-link-blog" data-page="@(ViewBag.PageIndex + 1)" aria-label="Next">
+                                        @(">")
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link-blog" data-page="@ViewBag.PageCount" aria-label="Next">
+                                        @(">>")
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>

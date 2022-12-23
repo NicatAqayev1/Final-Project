@@ -1,0 +1,179 @@
+﻿@model BlogVM
+@{
+    string tags = "";
+
+    int count = 0;
+    @foreach (Review review in Model.Reviews)
+    {
+        if (!review.IsDeleted)
+        {
+            count += 1;
+        }
+    }
+    bool UserActive = false;
+    if (User.Identity.IsAuthenticated)
+    {
+        UserActive = true;
+    }
+}
+<section id="aboutus">
+    <div class="container-fluid">
+        <div class="row aboutus">
+            <div class="content">
+                <h2>@Model.Blog.Title.ToUpper()</h2>
+                <h3>Home / <a href="" style="color: black;">News</a> / @Model.Blog.Title</h3>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="blog-detail">
+    <div class="container">
+        <div class="row blog-detail">
+            <div class="content">
+                <div class="image"><img src="~/images/blogs/@Model.Blog.Image" alt=""></div>
+                <h2><a href="">Customer of wine purchaser</a></h2>
+                <ul class="dets">
+                    <li>
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <span>@Model.Blog.CreatedAt.ToString()</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-message"></i>
+                        <span><span class="CommentCount">@count</span> Comment</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-circle-user"></i>
+                        <span>@Model.Blog.Publisher</span>
+                    </li>
+                </ul>
+                <div class="text">
+                    <h3 class="question"><i>Gosus in hendrerit gravida rutrum quisque?</i></h3>
+                    <p>
+                        @Model.Blog.Description.ToString().Substring(0, 300);
+                    </p>
+                    <h4>Tortor dignissim convallis aenean et tortor at risus euismod nisi porta lorem mollis.</h4>
+                    <p>
+                        @Model.Blog.Description.ToString().Substring(300);
+                    </p>
+                </div>
+                <div class="tags-share row">
+                    <ul class="tags col-lg-6">
+                        <i class="fa-solid fa-tag"></i>
+                        <li>
+                            <a href="">Bottle,</a>
+                        </li>
+                        <li>
+                            <a href="">Glass,</a>
+                        </li>
+                        <li>
+                            <a href="">Wine</a>
+                        </li>
+                    </ul>
+                    <ul class="share col-lg-6 justify-content-end">
+                        <span>Share with us:</span>
+                        <li>
+                            <a href="">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fa-brands fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fa-brands fa-pinterest"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fa-brands fa-google"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="older-newer-blogs-btn row justify-content-between">
+
+                    @for (int i = 0; i < Model.Blogs.Count() - 1; i++)
+                    {
+                        if (Model.Blog.Id == Model.Blogs.ToArray()[i].Id)
+                        {
+                            if (i == 0)
+                            {
+                                i = 1;
+                                <a asp-controller="blog" asp-route-bid="@(Model.Blogs.ToArray()[i].Id)" class="viewshopAbutton" style=" width: 100%; text-align: center;">
+                                    Newer Post
+                                </a>
+                                break;
+                            }
+                            @if (Model.Blogs.ToArray()[i + 1].Id <= Model.Blogs.ToArray()[Model.Blogs.Count() - 1].Id && Model.Blogs.ToArray()[i - 1].Id >= Model.Blogs.ToArray()[0].Id)
+                            {
+                                <a asp-controller="blog" asp-route-bid="@(Model.Blogs.ToArray()[i-1].Id)" class="viewshopAbutton">
+                                    Older Post
+                                </a>
+                                <a asp-controller="blog" asp-route-bid="@(Model.Blogs.ToArray()[i + 1].Id)" class="viewshopAbutton">
+                                    Newer Post
+                                </a>
+                                break;
+                            }
+                        }
+                        if (i == Model.Blogs.Count() - 2)
+                        {
+                            <a asp-controller="blog" asp-route-bid="@(Model.Blogs.ToArray()[i].Id)" class="viewshopAbutton" style=" width: 100%; text-align: center;">
+                                Older Post
+                            </a>
+                            break;
+                        }
+                    }
+                </div>
+                <div class="comments-form">
+                    <span class="succes-send">Your comment was posted successfully! Thank you!</span>
+                    <h2 class="com-count"><i class="fa-solid fa-message"></i><span class="CommentCount">@count</span> Comments</h2>
+                    <div class="comments ">
+
+                        @await Html.PartialAsync("_AddReviewPartial", Model)
+                    </div>
+                    <h2>Leave a comment</h2>
+                    <form method="post" enctype="multipart/form-data" class="comment-form row">
+                        <div class="col-lg-12">
+                            <textarea id="MessageMain" name="Message" cols="20" rows="10" placeholder="Message"></textarea>
+                        </div>
+                        <div class="post-btn">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a href="#" data-bid="@Model.Blog.Id" class="viewshopAbutton addReview">Post Comment</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="account" asp-action="login" class="viewshopAbutton">Post Comment</a>
+                            }
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $(document).on("click", ".addReview", function (e) {
+
+        e.preventDefault()
+        var id = $(this).attr("data-bid");
+        var Message = $("#MessageMain").val().trim()
+        fetch("AddReview" + "?Message=" + Message + "&bid=" + id).then(res => {
+            return res.text();
+        }).then(data => {
+            $(".comments").html(data);
+            $("#MessageMain").val("");
+
+            fetch("CommentCount" + "?id=" + id).then(response => {
+                return response.text()
+            }).then(data => {
+                $(".CommentCount").html(data);
+            })
+        })
+    })
+</script>

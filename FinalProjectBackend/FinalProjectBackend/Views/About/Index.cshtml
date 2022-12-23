@@ -1,0 +1,163 @@
+﻿@model About
+<section id="aboutus">
+    <div class="container-fluid">
+        <div class="row aboutus">
+            <div class="content">
+                <h2>ABOUT US</h2>
+                <h3>Home / About us</h3>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="winery">
+    <div class="container">
+        <div class="row winery">
+            <div class="left col-lg-6 col-md-6">
+                <div class="image"><img src="~/images/AboutPage/@Model?.IntroImage?" alt=""></div>
+            </div>
+            <div class="right col-lg-6 col-md-6">
+                <div class="content">
+                    <h2>@Model?.IntroHeader</h2>
+                    <p>
+                        @Html.Raw(Model?.IntroText)
+                    </p>
+                    <a asp-controller="shop" asp-action="index" class="viewshopAbutton shop">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="offer" style="background-image: url(../images/AboutPage/@Model?.OfferImage?)">
+    <div class="container">
+        <div class="row offer">
+            <div class="content">
+                <h2>@Model?.OfferHeader?</h2>
+                <h4>Our Latest Offers</h4>
+                <p>
+                    @Html.Raw(Model?.OfferText)
+                </p>
+                <a asp-controller="shop" asp-action="index" class="viewshopAbutton">Shop Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="organic">
+    <div class="container">
+        <div class="row organic">
+            <div class="left col-lg-6">
+                <div class="image"><img src="~/images/AboutPage/@Model?.AboutWineImage?" alt=""></div>
+            </div>
+            <div class="right col-lg-6">
+                <div class="content">
+                    <h2>@Html.Raw(Model?.AboutWineHeader)</h2>
+                    <p>
+                        @Html.Raw(Model?.AboutWineText)
+                    </p>
+                    <div class="icons row">
+                        <div class="col-lg-6 icon"><i class="fa-solid fa-car-rear"></i><span>Cooler</span></div>
+                        <div class="col-lg-6 icon"><i class="fa-solid fa-plane-up"></i><span>Blush</span></div>
+                        <div class="col-lg-6 icon"><i class="fa-solid fa-box-open"></i><span>Wine</span></div>
+                        <div class="col-lg-6 icon"><i class="fa-solid fa-train"></i><span>Kosher</span></div>
+                    </div>
+                    <a asp-controller="blog" asp-action="index" class="viewshopAbutton">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="counter">
+    <div class="container">
+        <div class="counter row">
+            <div class="counter-card col-lg-3">
+                <div class="icon">
+                    <i class="fa-solid fa-gem"></i>
+                </div>
+                <h2><span class="value" akhi="@ViewBag.Products">0</span>+</h2>
+                <h5>Products</h5>
+            </div>
+            <div class="counter-card col-lg-3">
+                <div class="icon">
+                    <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <h2><span class="value" akhi="@ViewBag.Blogs">0</span>+</h2>
+                <h5>Blogs</h5>
+            </div>
+            <div class="counter-card col-lg-3">
+                <div class="icon">
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+                </div>
+                <h2><span class="value" akhi="@ViewBag.Users">0</span>+</h2>
+                <h5>Our users</h5>
+            </div>
+            <div class="counter-card col-lg-3">
+                <div class="icon">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <h2><span class="value" akhi="@ViewBag.Reviews">0</span>+</h2>
+                <h5>Comments</h5>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="staff">
+    <div class="container">
+        <div class="header">
+            <h2>Our Staff</h2>
+            <h4>Meet our team with stylish ideas</h4>
+        </div>
+        <div class="row staff">
+            <div class="staff-card col-lg-4">
+                <div class="image">
+                    <div class="overlay">
+                        <ul class="social-icon">
+                            <li><a href="#" targer="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
+                            <li><a href="#" targer="_blank"><i class="fa-brands fa-pinterest"></i></a></li>
+                            <li><a href="#" targer="_blank"><i class="fa-brands fa-youtube-square"></i></a></li>
+                        </ul>
+                    </div>
+                    <img src="images/about-staff-1.webp" alt="">
+                </div>
+                <div class="content">
+                    <h4>Michael Johnson</h4>
+                    <h2>CEO</h2>
+                </div>
+            </div>
+            <div class="staff-card col-lg-4">
+                <div class="image">
+                    <div class="overlay">
+                        <ul class="social-icon">
+                            <li><a href="#" targer="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
+                            <li><a href="#" targer="_blank"><i class="fa-brands fa-pinterest"></i></a></li>
+                            <li><a href="#" targer="_blank"><i class="fa-brands fa-youtube-square"></i></a></li>
+                        </ul>
+                    </div>
+                    <img src="images/about-staff-2.webp" alt="">
+                </div>
+                <div class="content">
+                    <h4>Victoria Lewis</h4>
+                    <h2>Quality Tester</h2>
+                </div>
+            </div>
+            <div class="staff-card col-lg-4">
+                <div class="image">
+                    <div class="overlay">
+                        <ul class="social-icon">
+                            <li><a href="#" targer="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
+                            <li><a href="#" targer="_blank"><i class="fa-brands fa-pinterest"></i></a></li>
+                            <li><a href="#" targer="_blank"><i class="fa-brands fa-youtube-square"></i></a></li>
+                        </ul>
+                    </div>
+                    <img src="images/about-staff-3.webp" alt="">
+                </div>
+                <div class="content">
+                    <h4>Genevieve Davidson</h4>
+                    <h2>Support</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

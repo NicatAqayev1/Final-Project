@@ -1,0 +1,36 @@
+﻿@model LoginVM
+<form method="post" enctype="multipart/form-data" style="
+    font-family:Text Me One;
+      font-size: 16px;
+      width: 60%;
+      margin: 0 auto;
+      background-color: #e4e4e450;
+      padding: 25px;">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="single-input-item">
+        <input asp-for="Email" placeholder="Email" required="" style=" width: 100%; margin: 16px 0; padding: 10px 20px; border: 1px solid #e4e4e4;">
+        <span asp-validation-for="Email" style="display: block;color: red;"></span>
+    </div>
+    <div class="single-input-item">
+        <input asp-for="Password" placeholder="Enter your Password" required="" style=" width: 100%; margin: 16px 0; padding: 10px 20px; border: 1px solid #e4e4e4;">
+        <span asp-validation-for="Password" style="display: block;color: red;"></span>
+    </div>
+    <div class="single-input-item">
+        <div class="login-reg-form-meta d-flex align-items-center justify-content-between flex-column">
+            <div class="remember-meta col-lg-12">
+                <div class="custom-control custom-checkbox">
+                    <input asp-for="RememberMe">
+                    <label class="custom-control-label" asp-for="RememberMe">Remember Me</label>
+                </div>
+            </div>
+            <hr style="width: 100%;"/>
+            <div class="links col-lg-12 row justify-content-between">
+                <a href="" style="color: black;width: 50%;">Forgot your password?</a>
+                <a asp-controller="account" asp-action="register" style="color: black;width: 50%;text-align: end;">Create account</a>
+            </div>
+        </div>
+    </div>
+    <div class="single-input-item">
+        <button asp-controller="account" asp-action="login" class="btn viewshopAbutton" style="margin: 15px 0 0 5px;">Login</button>
+    </div>
+</form>

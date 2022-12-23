@@ -1,0 +1,53 @@
+﻿@model ContactVM
+<section id="aboutus">
+    <div class="container-fluid">
+        <div class="row aboutus">
+            <div class="content">
+                <h2>CONTACT  US</h2>
+                <h3>Home / Contact  us</h3>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="contact-cards">
+    <div class="container">
+        <div class="row contact-cards">
+            <div class="contact-card col-xl-4 col-lg-6 col-sm-6">
+                <div class="icon"><i class="fa-solid fa-phone"></i></div>
+                <h3>Phone</h3>
+                <p><span>Toll-Free:</span>@Model.Setting.Phone</p>
+                <p><span>Fax:</span>@Model.Setting.Fax</p>
+            </div>
+            <div class="contact-card col-xl-4 col-lg-6 col-sm-6">
+                <div class="icon"><i class="fa-solid fa-envelope"></i></div>
+                <h3>Email</h3>
+                <p>@Model.Setting.Email</p>
+                <p>@Model.Setting.Email2</p>
+            </div>
+            <div class="contact-card col-xl-4 col-lg-6 col-sm-6">
+                <div class="icon"><i class="fa-solid fa-location-arrow"></i></div>
+                <h3>Address</h3>
+                <p>@Model.Setting.Address</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="contact-form" class="container">
+    <div class="contact-form row">
+        <div class="left col-lg-6 col-sm-6">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12604.486092252522!2d144.947300394202!3d-37.83404082885788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad667fc041b9c61%3A0x5045675218ce850!2sSouth%20Melbourne%20VIC%203205%2C%20Australia!5e0!3m2!1sen!2s!4v1653394727581!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="right col-lg-6 col-sm-6">
+            <div class="contact">
+                <h2>Contact Form</h2>
+                <form method="post" enctype="multipart/form-data" asp-action="ContactMessage" asp-controller="contact"  id="contactForm">
+                    <input asp-for="Contact.Name" placeholder="Name" value="">
+                    <input asp-for="Contact.Email" placeholder="Email" value="">
+                    <input asp-for="Contact.Phone" placeholder="Phone" value="">
+                    <textarea id="Message" name="Message" cols="30" rows="10" placeholder="Message" value=""></textarea>
+                    <button class="viewshopAbutton send">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

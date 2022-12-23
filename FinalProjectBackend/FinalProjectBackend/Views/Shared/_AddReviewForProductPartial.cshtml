@@ -1,0 +1,52 @@
+﻿@model ProductVM
+@foreach (Review review in Model.Reviews)
+{
+<div class="comment" style="position: relative;">
+    <div class="icons">
+        @for (int i = 0; i < review.Star; i++)
+        {
+            <i class="fa-solid fa-star"></i>
+        }
+    </div>
+    <h4 class="title">@review.Email</h4>
+    <p class="date"><i>@review.Name <span>on</span> @review.CreatedAt?.ToString("MMMM dd") , @review.CreatedAt?.ToString("yyyy")</i></p>
+    <p class="comment">@review.Message</p>
+    <div class="buttonss">
+        @if (User.Identity.Name == review.Name)
+        {
+            <div class="comment-body" style=" position: absolute; top: 0%; right: 0;">
+                <span class="reply-btn">
+                    <a href="#" data-id="@review.Id" class="changeCommentp" style=" color: black; border-radius: 15px; border: 1px solid #bfbfbf; padding: 5px 10px; background-color: #ececec;">Change</a>
+                </span>
+            </div>
+            <div class="comment-body" style=" position: absolute; top: 50px; right: 0;">
+                <span class="reply-btn">
+                    <a href="#" data-id="@review.Id" data-bid="@review.ProductId" class="deleteCommentp" style=" color: black; border-radius: 15px; border: 1px solid #bfbfbf; padding: 5px 13px; background-color: #ececec;">Delete</a>
+                </span>
+            </div>
+        }
+    </div>
+    <form method="post" asp-action="Edit" asp-controller="product" asp-route-id="@Model.Reviews.FirstOrDefault(p=>p.ProductId == Model.Product.Id && !p.IsDeleted).Id" id="editForma" style="display: none;">
+        <div class="comment-post-box">
+            <div class="row" style="position: relative;">
+                <div class="col-12" style="padding: 0px;">
+                    <textarea id="MessageEditp" name="Message" placeholder="Write a comment" style="height: 100px; width: 100%;margin: 0px; padding: 10px; box-shadow: 0px -1px 6px 0px #80808040;">@Model.Reviews.FirstOrDefault(p=>p.ProductId == Model.Product.Id && p.Id == review.Id && !p.IsDeleted).Message</textarea>
+                </div>
+                <div class="col-2" style="position: absolute; right: 0; top: 0; width: auto; background-color: #f7f7f7; padding: 0;">
+                    <div class="coment-btn">
+                        @if (User.Identity.Name == review.Name)
+                        {
+                            <a class="btn editCommentp" data-rid="@Model.Reviews.FirstOrDefault(p=>p.ProductId == Model.Product.Id && !p.IsDeleted).Id" style="border: 0;">Edit</a>
+                        }
+                        else
+                        {
+                            <a href="#" class="btn default-link" style="border: 0;">Edit</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+    <hr style="margin:0;"/>
+}

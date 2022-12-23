@@ -1,0 +1,165 @@
+﻿@model IEnumerable<Product>
+@{
+
+    int count = (ViewBag.PageIndex - 1) * 5;
+}
+<section id="aboutus">
+    <div class="container-fluid">
+        <div class="row aboutus">
+            <div class="content">
+                <h2>@ViewBag.WhichName</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="products">
+    <div class="container">
+        <div class="row products">
+            <div class="right col-lg-12">
+                <div class="collection-header row">
+                    <div class="grids col-lg-4">
+                        <button class="equal grid active-grid">
+                            <i class="fa-solid fa-grip-vertical"></i>
+                        </button>
+                        <button class="nonequal grid">
+                            <i class="fa-solid fa-grip"></i>
+                        </button>
+                    </div>
+                    <div class="prod-count col-lg-4">
+                        <span>Paginate by</span>
+                        <select form="order" class="nice-select" name="countby" onchange="form.submit()">
+                            <option value="9">9</option>
+                            <option value="12">12</option>
+                            <option value="16">16</option>
+                            <option value="20">20</option>
+                            <option value="24">24</option>
+                            <option value="30">30</option>
+                            <option value="48">48</option>
+                        </select>
+                    </div>
+                    <div class="sort col-lg-4">
+                        <span>Sort by</span>
+                        <select form="order" class="nice-select" name="sortby" onchange="form.submit()">
+                            <option value="1">Featured</option>
+                            <option value="2">Best selling</option>
+                            <option value="3">Alphabetically, A-Z</option>
+                            <option value="4">Alphabetically, Z-A</option>
+                            <option value="5">Price, low to high</option>
+                            <option value="6">Price, high to low</option>
+                            <option value="7">Date, old to new</option>
+                            <option value="8">Date, new to old</option>
+                        </select>
+                        <form method="post" id="order" style="display: none;"></form>
+                    </div>
+                </div>
+                <div class="collection row">
+
+                    @foreach (Product product in Model)
+                    {
+                        foreach (ProductColorSize productColorSize in product.ProductColorSizes)
+                        {
+                            <div class="product-card col-lg-4">
+                                <div class="image">
+                                    <div class="sale">Sale</div>
+                                    <div class="overlay">
+                                        <a asp-controller="product" asp-action="detail" asp-route-id="@product.Id" class="linktoProddetail"></a>
+                                        <div class="buttons">
+                                            <div class="compare">
+                                                <a href="~/" class="product-card-icons">
+                                                    <i class="fa-solid fa-images"></i>
+                                                </a>
+                                            </div>
+                                            <div class="heart">
+                                                <a href="~/" class="product-card-icons">
+                                                    <i class="fa-solid fa-heart"></i>
+                                                </a>
+                                            </div>
+                                            <div class="search">
+                                                <a href="~/" class="product-card-icons">
+                                                    <i class="fa-solid fa-magnifying-glass open-modal"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <img src="~/images/products/@product.MainImage" class="main" alt="">
+                                    <img src="~/images/products/@product.HoverImage" class="hover" alt="">
+                                </div>
+                                <div class="content">
+                                    <a href="~/" class="prod-name">@product.Name</a>
+                                    @if (productColorSize.DiscountPrice != null)
+                                    {
+                                        <div style="display: flex; justify-content: center; align-items: center;">
+                                            <h3>$@productColorSize.DiscountPrice</h3>
+                                            <del style="margin: 0 10px;color: #80808091;font-family: Text Me One, sans-serif;font-weight: 700;">$@productColorSize.Price</del>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <h3>$@productColorSize.Price</h3>
+                                    }
+
+                                    <a asp-controller="home" asp-action="AddToBasket"
+                                       asp-route-id="@product.Id"
+                                       asp-route-colorid="@productColorSize.ColorId"
+                                       asp-route-sizeid="@productColorSize.SizeId"
+                                       asp-route-DisPrice="@productColorSize.DiscountPrice"
+                                       asp-route-Price="@productColorSize.Price"
+                                       data-toggle="tooltip" title="Add To Cart" class="addtocart">
+                                        <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="col-lg-12 d-flex justify-content-center" style="margin-top: 50px;">
+                        <nav>
+                            <ul class="pagination">
+
+                                @if (ViewBag.PageIndex > 1)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" asp-action="index" asp-route-page="1" aria-label="Previous">
+                                            @("<<")
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" asp-action="index" asp-route-page="@(ViewBag.PageIndex-1)" aria-label="Previous">
+                                            @("<")
+                                        </a>
+                                    </li>
+                                    @if (ViewBag.PageIndex == ViewBag.PageCount && ViewBag.PageIndex > 2)
+                                    {
+                                        <li class="page-item"><a class="page-link" asp-action="index" asp-route-page="@(ViewBag.PageIndex-2)">@(ViewBag.PageIndex-2)</a></li>
+                                    }
+                                    <li class="page-item"><a class="page-link" asp-action="index" asp-route-page="@(ViewBag.PageIndex-1)">@(ViewBag.PageIndex-1)</a></li>
+                                }
+
+                                <li class="page-item"><a class="page-link" style="background: #e3a51e;color:white;" asp-action="index" asp-route-page="@ViewBag.PageIndex">@ViewBag.PageIndex</a></li>
+
+                                @if (ViewBag.PageIndex < ViewBag.PageCount)
+                                {
+                                    <li class="page-item"><a class="page-link" asp-action="index" asp-route-page="@(ViewBag.PageIndex + 1)">@(ViewBag.PageIndex + 1)</a></li>
+
+                                    @if (ViewBag.PageIndex == 1 && (ViewBag.PageIndex + 2) < ViewBag.PageCount)
+                                    {
+                                        <li class="page-item"><a class="page-link" asp-action="index" asp-route-page="@(ViewBag.PageIndex+2)">@(ViewBag.PageIndex+2)</a></li>
+                                    }
+                                    <li class="page-item">
+                                        <a class="page-link" asp-route-page="@(ViewBag.PageIndex + 1)" aria-label="Next">
+                                            @(">")
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" asp-action="index" asp-route-page="@ViewBag.PageCount" aria-label="Next">
+                                            @(">>")
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

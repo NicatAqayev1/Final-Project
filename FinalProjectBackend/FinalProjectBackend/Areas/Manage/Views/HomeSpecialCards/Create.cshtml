@@ -1,0 +1,52 @@
+﻿@model HomeSpecialCards
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Create IntroSlider</h1>
+            </div>
+        </div>
+        <div class="row justify-content-lg-center">
+            <div class="col-lg-8">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="CardName"></label>
+                        <input class="form-control" asp-for="CardName" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="CardName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CardText"></label>
+                        <input class="form-control" asp-for="CardText" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="CardText"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CardImageFile"></label>
+                        <input class="form-control" accept="image/jpg" asp-for="CardImageFile" placeholder="Choose ImageFile">
+                        <span class="text-danger" asp-validation-for="CardImageFile"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+            </div>
+        </div>
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-primary" asp-action="Index">Go To List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Script{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).on("click", ".addbtn", function (e) {
+                e.preventDefault();
+                fetch($(this).attr("href")).then(response => response.text()).then(data => $(".inputContaineForadd").append(data));
+            })
+        })
+    </script>
+}
+}

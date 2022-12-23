@@ -1,0 +1,160 @@
+﻿@model Home
+
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Update Product</h1>
+            </div>
+        </div>
+        <div class="row justify-content-lg-center">
+            <div class="col-lg-8">
+                <form method="post" enctype="multipart/form-data">
+                    <h2 class="text-center">Arrival section</h2>
+                    <div class="form-group">
+                        <label asp-for="UpgradeLatestImageFile"></label>
+                        <input class="form-control" accept="image/jpg" asp-for="UpgradeLatestImageFile" placeholder="Choose ImageFile">
+                        <span class="text-danger" asp-validation-for="UpgradeLatestImageFile"></span>
+                        @*<img src="~/images/AboutPage/@Model.IntroImage" />*@
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UpgradeLatestSignImageFile"></label>
+                        <input class="form-control" accept="image/jpg" asp-for="UpgradeLatestSignImageFile" placeholder="Choose ImageFile">
+                        <span class="text-danger" asp-validation-for="UpgradeLatestSignImageFile"></span>
+                        @*<img src="~/images/AboutPage/@Model.IntroImage" />*@
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UpgradeLatestHeader"></label>
+                        <input class="form-control" asp-for="UpgradeLatestHeader" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="UpgradeLatestHeader"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UpgradeLatestText"></label>
+                        <input class="form-control" asp-for="UpgradeLatestText" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="UpgradeLatestText"></span>
+                    </div>
+
+                    <h2 class="text-center">Upgrade section</h2>
+
+                    <div class="form-group">
+                        <label asp-for="SpecialImageFile"></label>
+                        <input class="form-control" accept="image/jpg" asp-for="SpecialImageFile" placeholder="Choose ImageFile">
+                        <span class="text-danger" asp-validation-for="SpecialImageFile"></span>
+                        @*<img src="~/images/AboutPage/@Model.IntroImage" />*@
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SpecialHeader"></label>
+                        <input class="form-control" asp-for="SpecialHeader" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="SpecialHeader"></span>
+                    </div>
+
+
+                    <h2 class="text-center">Gallery section</h2>
+                    <div class="form-group">
+                        <label asp-for="HurryImageFile"></label>
+                        <input class="form-control" accept="image/jpg" asp-for="HurryImageFile" placeholder="Choose ImageFile">
+                        <span class="text-danger" asp-validation-for="HurryImageFile"></span>
+                        @*<img src="~/images/AboutPage/@Model.IntroImage" />*@
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="HurryHeader"></label>
+                        <input class="form-control" asp-for="HurryHeader" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="HurryHeader"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="HurrySaleText"></label>
+                        <input class="form-control" asp-for="HurrySaleText" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="HurrySaleText"></span>
+                    </div>
+
+                    <h2 class="text-center">Featured section</h2>
+
+                    <div class="form-group">
+                        <label asp-for="ArrivalHeader"></label>
+                        <input class="form-control" asp-for="ArrivalHeader" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="ArrivalHeader"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ArrivalText"></label>
+                        <input class="form-control" asp-for="ArrivalText" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="ArrivalText"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ArrivalFeatureBtnText"></label>
+                        <input class="form-control" asp-for="ArrivalFeatureBtnText" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="ArrivalFeatureBtnText"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ArrivalNewBtnText"></label>
+                        <input class="form-control" asp-for="ArrivalNewBtnText" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="ArrivalNewBtnText"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ArrivalBestBtnText"></label>
+                        <input class="form-control" asp-for="ArrivalBestBtnText" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="ArrivalBestBtnText"></span>
+                    </div>
+
+                    <h2 class="text-center">Hurry section</h2>
+
+                    <div class="form-group">
+                        <label asp-for="GalleryHeader"></label>
+                        <input class="form-control" asp-for="GalleryHeader" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="GalleryHeader"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="GalleryText"></label>
+                        <input class="form-control" asp-for="GalleryText" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="GalleryText"></span>
+                    </div>
+
+                    <h2 class="text-center">Special section</h2>
+
+                    <div class="form-group">
+                        <label asp-for="featuredProdsImageFile"></label>
+                        <input class="form-control" accept="image/jpg" asp-for="featuredProdsImageFile" placeholder="Choose ImageFile">
+                        <span class="text-danger" asp-validation-for="featuredProdsImageFile"></span>
+                        @*<img src="~/images/AboutPage/@Model.IntroImage" />*@
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="featuredProdsHeader"></label>
+                        <input class="form-control" asp-for="featuredProdsHeader" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="featuredProdsHeader"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="featuredProdsText"></label>
+                        <input class="form-control" asp-for="featuredProdsText" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="featuredProdsText"></span>
+                    </div>
+
+                    <h2 class="text-center">Client section</h2>
+
+                    <div class="form-group">
+                        <label asp-for="OurClientsHeader"></label>
+                        <input class="form-control" asp-for="OurClientsHeader" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="OurClientsHeader"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="OurClientsText"></label>
+                        <input class="form-control" asp-for="OurClientsText" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="OurClientsText"></span>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+            </div>
+        </div>
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-primary" asp-action="Index">Go To List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Script{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+}

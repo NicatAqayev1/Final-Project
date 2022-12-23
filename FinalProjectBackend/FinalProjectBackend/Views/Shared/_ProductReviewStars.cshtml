@@ -1,0 +1,29 @@
+﻿@model ProductVM
+@{
+    double stars = Model.Reviews.Sum(p => p.Star);
+    double reCount = Model.Reviews.Count();
+    double starCount = stars / reCount;
+    if (double.IsNaN(starCount))
+    {
+        starCount = 0;
+    }
+}
+<div class="icons">
+    @if (stars != 0 && reCount != 0)
+    {
+        @for (int i = 0; i < Math.Floor(starCount); i++)
+        {
+            <i class="fa-solid fa-star"></i>
+        }
+        @if ((starCount - Math.Floor(starCount)) > 0 && (starCount - Math.Floor(starCount)) < 1)
+        {
+            <i class="fa-solid fa-star-half-stroke"></i>
+        }
+    }
+        @for (int i = 0; i < 5-(int)Math.Ceiling(starCount); i++)
+        {
+            <i class="fa-solid fa-star" style="color: #ccc;"></i>
+        }
+    <span>(@starCount.ToString("0.0"))</span>
+    <span class="based">Based on <span class="prodCommentCount">@reCount</span> review</span>
+</div>

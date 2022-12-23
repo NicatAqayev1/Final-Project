@@ -1,0 +1,16 @@
+﻿@model Review
+<form method="post" asp-action="Edit" asp-controller="blog" asp-route-id="@Model.Id">
+    <div class="comment-post-box">
+        <div class="row">
+            <div class="col-6">
+                <label for="Message">Comment</label>
+                <textarea id="Message" name="Message" placeholder="Write a comment" style="height: 100px; width: 85%;">@Model.Message</textarea>
+            </div>
+            <div class="col-6">
+                <div class="coment-btn">
+                    <button class="btn" name="submit">Edit COMMENT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

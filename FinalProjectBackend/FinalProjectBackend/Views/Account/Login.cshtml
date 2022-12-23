@@ -1,0 +1,36 @@
+﻿@model LoginVM
+<section id="login">
+    <div class="container">
+        <div class="row login">
+            <form method="post" enctype="multipart/form-data" id="loginForm" class="loginAccForm">
+                <div asp-validation-summary="ModelOnly" style="color: red;font-size: 20px;"></div>
+                <label asp-for="Email"></label>
+                <input asp-for="Email" placeholder="Email" class="forSendEmail">
+                <span asp-validation-for="Email" style="display: block;color: red;"></span>
+
+                <label asp-for="Password"></label>
+                <input asp-for="Password" placeholder="Password">
+                <span asp-validation-for="Password" style="display: block;color: red;"></span>
+                <div class="login-basket">
+
+                </div>
+                <div class="row">
+                    <label asp-for="RememberMe" style="width: auto;">Remember me</label>
+                    <input type="checkbox" asp-for="RememberMe" style="width: auto;margin: 0px;" />
+                </div>
+                <button type="submit" class="loginSubmit viewshopAbutton">Sign in</button>
+                <hr>
+                <div class="EmailVerify"></div>
+                <div class="links">
+                    <a asp-controller="account" asp-action="register">Create account</a>
+                    <a asp-controller="home" asp-action="index">Return to Store</a>
+                    <a asp-controller="Account" asp-action="ResetPassword" class="forgotYourPassword">Forgot your password</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Script{
+    <partial name="_ValidationFormScriptPartial" />
+}

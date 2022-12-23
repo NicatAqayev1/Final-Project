@@ -1,0 +1,69 @@
+﻿@model Blog
+
+<div class="page-wrapper updateBlog">
+    <div class="row">
+        <div class="col-lg-2">
+            <img style="width:100%" src="~/images/blogs/@Model.Image" alt="Alternate Text" />
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Update Blog</h1>
+            </div>
+        </div>
+        <div class="row justify-content-lg-center">
+            <div class="col-lg-8">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="Publisher"></label>
+                        <input class="form-control" asp-for="Publisher" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="Publisher"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Title"></label>
+                        <input class="form-control" asp-for="Title" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="Title"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ImageFile"></label>
+                        <input class="form-control" accept="image/jpg" asp-for="ImageFile" placeholder="Choose ImageFile">
+                        <span class="text-danger" asp-validation-for="ImageFile"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TagIds" style="margin-right: 10px;">Tags</label>
+                        @for (var i = 0; i < ViewBag.Tags.Count; i++)
+                        {
+                            if (Model != null && Model.BlogTags != null && Model.BlogTags.Any(p => p.TagId == ViewBag.Tags[i].Id))
+                            {
+                                <input type="checkbox" name="TagIds" id="TagIds" value="@(ViewBag.Tags[i].Id)" checked />@(ViewBag.Tags[i].Name)
+                            }
+                            else
+                            {
+                                <input type="checkbox" name="TagIds" id="TagIds" value="@(ViewBag.Tags[i].Id)" />@(ViewBag.Tags[i].Name)
+                            }
+                        }
+                        <span class="text-danger" asp-validation-for="TagIds"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description"></label>
+                        <textarea class="form-control" asp-for="Description" placeholder="Enter Description"></textarea>
+                        <span class="text-danger" asp-validation-for="Description"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+            </div>
+        </div>
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-primary" asp-action="Index">Go To List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Script{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+}

@@ -1,0 +1,139 @@
+﻿@model List<Product>
+
+@{ 
+    int count = 0;
+    int count2 = 0;
+    @foreach (Product product in Model.Take(6))
+    {
+        foreach (ProductColorSize productColorSize in product.ProductColorSizes)
+        {
+            count2++;
+        }
+    } 
+}
+<style>
+    .product-card-search {
+        background-color: white;
+        padding: 0px;
+    }
+
+        .product-card-search .search-products {
+            flex-direction: row;
+            border-bottom: 1px solid #80808038;
+            padding: 10px 0;
+        }
+
+            .product-card-search .search-products .img-a {
+                padding: 0;
+                width: 10%;
+            }
+
+            .product-card-search .search-products img {
+                padding: 0;
+                width: 100%;
+            }
+
+            .product-card-search .search-products .content-s {
+                padding: 0;
+                align-items: start;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+                .product-card-search .search-products .content-s .name {
+                    color: black;
+                    font-weight: 600;
+                    font-family: 'Text Me One';
+                    font-size: 16px;
+                }
+
+                .product-card-search .search-products .content-s .prices {
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                }
+
+                .product-card-search .search-products .content-s h3 {
+                    font-size: 14px;
+                    font-weight: 200;
+                    margin: 0px;
+                }
+
+                .product-card-search .search-products .content-s del {
+                    font-size: 14px;
+                    font-weight: 400;
+                    margin: 0 10px;
+                    color: #80808091;
+                    font-family: Text Me One, sans-serif;
+                    font-weight: 700;
+                }
+
+    .list-proddet .triangle {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: 20px;
+        opacity: 1;
+        border-bottom: 10px solid #fff;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+    }
+
+    .list-proddet {
+        position: relative;
+    }
+    .myprodList {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        width: 100%;
+        flex-wrap: wrap;
+        box-shadow: 0 0 10px #777777;
+        background-color: white;
+    }
+</style>
+<div class="list-proddet">
+    @if (count2 != 0)
+    {
+        <div class="triangle"></div>
+    }
+<div class="myprodList">
+    @foreach (Product product in Model.Take(6))
+    {
+        foreach (ProductColorSize productColorSize in product.ProductColorSizes)
+        {
+            count++;
+
+@if (count <= 6)
+{
+<div class="product-card-search col-lg-6">
+    <div class="search-products row">
+        <a asp-controller="product"
+           asp-action="detail"
+           asp-route-id="@product.Id"
+           asp-route-colorid="@productColorSize.ColorId"
+           asp-route-sizeid="@productColorSize.SizeId"
+           class="img-a">
+            <img src="~/images/products/@productColorSize.Image" alt="">
+        </a>
+        <div class="content-s col-lg-9">
+            <a asp-controller="product"
+           asp-action="detail"
+           asp-route-id="@product.Id"
+           asp-route-colorid="@productColorSize.ColorId"
+           asp-route-sizeid="@productColorSize.SizeId" class="name">@product.Name</a>
+            @if (productColorSize.DiscountPrice != 0)
+            {
+<div class="prices">
+    <h3>Rs. @productColorSize.DiscountPrice.ToString("0.00")</h3>
+</div> }
+else
+{
+<h3>Rs. @productColorSize.Price.ToString("0.00")</h3>}
+        </div>
+    </div>
+</div>}}
+}
+</div>
+</div>

@@ -1,0 +1,163 @@
+﻿@model IEnumerable<Blog>
+@{ 
+    int count = (ViewBag.PageIndex - 1) * 6;
+    int BlogCount = 0;
+}
+<section id="aboutus">
+    <div class="container-fluid">
+        <div class="row aboutus">
+            <div class="content">
+                <h2>Blogs</h2>
+                <h3>Home / Blogs</h3>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="products">
+    <div class="container">
+        <div class="row products">
+            <div class="left col-lg-3">
+                <div class="category">
+                    <h4 class="list-header">Recent articles</h4>
+                    <ul class="category-list">
+                        @foreach (Blog blog in ViewBag.Blogs)
+                        {
+                            <li class="row">
+                                <div class="left col-lg-5">
+                                    <div class="image" style=" margin: 0 0 15px;"><img src="~/images/blogs/@blog.Image" alt=""></div>
+                                </div>
+                                <div class="right col-lg-7">
+                                    <div class="content">
+                                        <a href="" class="top-text">
+                                            @blog.Title
+                                        </a>
+                                        <p class="bottom-text">
+                                            @blog.Description.Substring(0,30)...
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="tag">
+                    <h4 class="list-header">Tags</h4>
+                    <ul class="tag-list">
+                        @foreach (Tag tag in ViewBag.Tags)
+                        {
+                            if (tag.Id == ViewBag.TagId)
+                            {
+                                <li><a class="blogtagFilter" asp-controller="blog" asp-action="toTag" data-tag="@tag.Id" style="color: #c1001c;">@tag.Name (@tag.BlogTags.Count())</a></li>
+                            }
+                            else
+                            {
+                                <li><a class="blogtagFilter" asp-controller="blog" asp-action="toTag" data-tag="@tag.Id">@tag.Name (@tag.BlogTags.Count())</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <div class="bestseller">
+                    <h4 class="list-header">Shop By Brand</h4>
+                    <ul class="bestseller-list">
+                        <div class="swiper mySwiper3">
+                            <div class="swiper-wrapper">
+                                
+                                @foreach (Product product in ViewBag.Products)
+                                {
+                                        <div class="swiper-slide">
+                                    <div class="product-card col-lg-4">
+                                        <div class="image">
+                                            @if (product.ProductColorSizes.ElementAt(0).DiscountPrice != 0)
+                                            {
+                                                <div class="sale">Sale</div>
+                                            }
+                                            <div class="overlay">
+                                                <a asp-controller="product" asp-action="detail" asp-route-id="@product.Id" asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId" asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId" class="linktoProddetail"></a>
+                                                <div class="buttons">
+                                                    <div class="compare">
+                                                        <a href="~/" class="product-card-icons">
+                                                            <i class="fa-solid fa-images"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="heart">
+                                                        @if (User.Identity.IsAuthenticated)
+                                                        {
+                                                <a asp-controller="home"
+                                                   asp-action="AddToWishlist"
+                                                   asp-route-id="@product.Id"
+                                                   asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                   asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                   class="product-card-icons addtowishlist">
+                                                    <i class="fa-solid fa-heart"></i>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="account"
+                                                   asp-action="login"
+                                                   class="product-card-icons">
+                                                    <i class="fa-solid fa-heart"></i>
+                                                </a>}
+                                                    </div>
+                                                    <div class="search" class="product-card-icons">
+                                                        <a asp-controller="home"
+                                                           asp-action="DetailModal"
+                                                           asp-route-id="@product.Id"
+                                                           asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                           asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                           class="product-card-icons">
+                                                            <i class="fa-solid fa-magnifying-glass open-modal"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <img src="~/images/products/@product.MainImage" class="main" alt="">
+                                            <img src="~/images/products/@product.HoverImage" class="hover" alt="">
+                                        </div>
+                                        <div class="content">
+                                            <a href="~/" class="prod-name">@product.Name</a>
+                                            @if (product.ProductColorSizes.ElementAt(0).DiscountPrice != 0)
+                                            {
+                                                <div style="display: flex; justify-content: center; align-items: center;">
+                                                    <h3>$@product.ProductColorSizes.ElementAt(0).DiscountPrice</h3>
+                                                    <del style="margin: 0 10px;color: #80808091;font-family: Text Me One, sans-serif;font-weight: 700;">$@product.ProductColorSizes.ElementAt(0).Price</del>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <h3>$@product.ProductColorSizes.ElementAt(0).Price</h3>
+                                            }
+                                            @if (product.ProductColorSizes.ElementAt(0).StockCount < 1)
+                                            {
+                                                <a href="#"
+                                                    data-toggle="tooltip" title="Add To Cart" class="default-link outofstock">
+                                                    <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="home" asp-action="AddToBasket"
+                                                    asp-route-id="@product.Id"
+                                                    asp-route-colorid="@product.ProductColorSizes.ElementAt(0).ColorId"
+                                                    asp-route-sizeid="@product.ProductColorSizes.ElementAt(0).SizeId"
+                                                    data-toggle="tooltip" title="Add To Cart" class="addtocart">
+                                                    <i class="fa-solid fa-cart-shopping"></i>Add to cart
+                                                </a>
+                                            }
+                                        </div>
+                                    </div>
+                                            </div>
+                                            }
+                            </div>
+                        </div>
+                        <div class="swiper-button-next swiper-button"></div>
+                        <div class="swiper-button-prev swiper-button"></div>
+                    </ul>
+                </div>
+            </div>
+            <div class="right col-lg-9 blog-right">
+                @await Html.PartialAsync("_BlogListPartial",Model)
+            </div>
+        </div>
+    </div>
+</section>

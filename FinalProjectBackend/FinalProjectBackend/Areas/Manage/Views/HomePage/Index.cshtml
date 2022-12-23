@@ -1,0 +1,171 @@
+﻿@model Home
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-8 align-self-center">
+                <h3 class="page-title mb-0 p-0">Blank Page</h3>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Blank Page</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-md-6 col-4 align-self-center">
+                <div class="text-end upgrade-btn">
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center">Arrival section</h2>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ArrivalBestBtnText</th>
+                                    <th scope="col">ArrivalFeatureBtnText</th>
+                                    <th scope="col">ArrivalNewBtnText</th>
+                                    <th scope="col">ArrivalHeader</th>
+                                    <th scope="col">ArrivalText</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@Html.Raw(Model.ArrivalBestBtnText)</td>
+                                    <td>@Html.Raw(Model.ArrivalFeatureBtnText)</td>
+                                    <td>@Html.Raw(Model.ArrivalNewBtnText)</td>
+                                    <td>@Html.Raw(Model.ArrivalHeader)</td>
+                                    <td>@Html.Raw(Model.ArrivalFeatureBtnText)</td>
+                                    <td>@Html.Raw(Model.ArrivalText)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2 class="text-center">Upgrade section</h2>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">UpgradeLatestImage</th>
+                                    <th scope="col">UpgradeLatestSignImage</th>
+                                    <th scope="col">UpgradeLatestHeader</th>
+                                    <th scope="col">UpgradeLatestText</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src="~/images/MainHJome/@Model.UpgradeLatestImage" style="width:100px;object-fit:cover;" />
+                                    </td>
+                                    <td>
+                                        <img src="~/images/MainHJome/@Model.UpgradeLatestSignImage" style="width:100px;object-fit:cover;" />
+                                    </td>
+                                    <td>@Html.Raw(Model.UpgradeLatestHeader)</td>
+                                    <td>@Html.Raw(Model.UpgradeLatestText)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2 class="text-center">Gallery section</h2>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">GalleryHeader</th>
+                                    <th scope="col">GalleryText</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@Html.Raw(Model.GalleryHeader)</td>
+                                    <td>@Html.Raw(Model.GalleryText)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2 class="text-center">Featured section</h2>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">featuredProdsImage</th>
+                                    <th scope="col">featuredProdsHeader</th>
+                                    <th scope="col">featuredProdsText</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src="~/images/MainHJome/@Model.featuredProdsImage" style="width:100px;object-fit:cover;" />
+                                    </td>
+                                    <td>@Html.Raw(Model.featuredProdsHeader)</td>
+                                    <td>@Html.Raw(Model.featuredProdsText)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2 class="text-center">Hurry section</h2>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">HurryImage</th>
+                                    <th scope="col">HurryHeader</th>
+                                    <th scope="col">HurrySaleText</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src="~/images/MainHJome/@Model.HurryImage" style="width:100px;object-fit:cover;" />
+                                    </td>
+                                    <td>@Html.Raw(Model.HurryHeader)</td>
+                                    <td>@Html.Raw(Model.HurrySaleText)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2 class="text-center">Special section</h2>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">SpecialImage</th>
+                                    <th scope="col">SpecialHeader</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src="~/images/MainHJome/@Model.SpecialImage" style="width:100px;object-fit:cover;" />
+                                    </td>
+                                    <td>@Html.Raw(Model.SpecialHeader)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2 class="text-center">Client section</h2>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">OurClientsHeader</th>
+                                    <th scope="col">OurClientsText</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@Html.Raw(Model.OurClientsHeader)</td>
+                                    <td>@Html.Raw(Model.OurClientsText)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a asp-action="Change" asp-controller="homepage" asp-area="manage" asp-route-id="@Model.Id" class="col-lg-12 btn btn-primary">Change</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <footer class="footer text-center">
+        © 2021 Monster Admin by <a href="https://www.wrappixel.com/">wrappixel.com</a>
+    </footer>
+    <!-- ============================================================== -->
+</div>

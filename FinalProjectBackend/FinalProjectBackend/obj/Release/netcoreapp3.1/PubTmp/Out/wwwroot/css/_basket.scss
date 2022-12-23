@@ -1,0 +1,247 @@
+$primary-font-family : 'Text Me One', sans-serif;
+$second-font-family : 'Philosopher', sans-serif;
+$primary-color : #c1001c;
+$second-red-color : #f01737;
+$button-hover-color : #d2aa5c;
+#basket{
+    padding: 80px 0;
+    .basket{
+        .left{
+            h2{
+                font-family: $second-font-family;
+                font-size: 22px;
+                margin-bottom: 15px;
+            }
+            .basket-card{
+                border: 1px solid #e4e4e4;
+                margin: 10px 0;
+                position: relative;
+                .remove-icon{
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    padding: 5px;
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 1px solid #e4e4e4;
+                    cursor: pointer;
+                    transition: all .3s;
+                    i{
+                        font-size: 22px;
+                    }
+                    &:hover{
+                        background-color: $button-hover-color;
+                        color: white;
+                        transition: all .3s;
+                    }
+                }
+                .left-card{
+                    padding: 0px;
+                    .image{
+                        img{
+                            width: 85%;
+                        }
+                    }
+                }
+                .right-card{
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    padding: 0px;
+                    .content{
+                        font-family: $primary-font-family;
+                        .prod-name{
+                            font-family: $second-font-family;
+                            font-size: 22px;
+                            display: inline-block;
+                            margin-bottom: 10px;
+                            color: black;
+                            transition: all 0.3s;
+                            &:hover{
+                                color: $primary-color;
+                                transition: all 0.3s;
+                            }
+                        }
+                        .prod-elements{
+                            margin-bottom: 10px;
+                            font-size: 16px;
+                            justify-content: flex-start;
+                            li{
+
+                                &::after{
+                                    content: "/";
+                                    display: inline-block;
+                                    position: relative;
+                                    -webkit-transform: translateY(-1px);
+                                    transform: translateY(-1px);
+                                    padding: 0 10px;
+                                }
+                            }
+                        }
+                        .price{
+                            font-size: 16px;
+                            font-weight: 700;
+                            span{
+                                
+                            }
+                        }
+                        .count{
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+                            font-size: 16px;
+                            margin: 10px 0;
+                            a,input{
+                                color: black;
+                                width: 30px;
+                                height: 30px;
+                                border: 1px solid #e4e4e4;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                text-align: center;
+                                transition: all .3s;
+                            }
+                            a{
+                                &:hover{
+                                    color: white;
+                                    background-color: $primary-color;
+                                    transition: all .3s;
+                                }
+                            }
+                            .inc{
+
+                            }
+                            .prod-count{
+                            }
+                            .dec{
+
+                            }
+                        }
+                        .total{
+                            font-family: $primary-font-family;
+                            font-size: 16px;
+                            font-weight: 700;
+                            span{
+
+                            }
+                        }
+                    }
+                }
+            }
+            .process-buttons{
+                margin-top: 50px;
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+        .right{
+            h2{
+                font-family: $second-font-family;
+                font-size: 22px;
+                margin-bottom: 15px;
+            }
+            .subtotal{
+                font-family: $primary-font-family;
+                font-size: 16px;
+                .subtotal-value{
+                    color: $primary-color;
+                    font-weight: 700;
+                }
+                .addNote{
+                    margin-bottom: 10px;
+                }
+                .addNoteLabel{
+                    display: none;
+                }
+                #addNoteInput{
+                    display: none;
+                    border: 1px solid #e4e4e4;
+                    width: 100%;
+                    border: 1px solid #e4e4e4;
+                    padding: 5px;
+                    margin: 5px 0 20px;
+                    min-height: 150px;
+                    resize: vertical;
+                    transition: all .3s linear;
+                    &:focus{
+                        border: 1px solid $primary-color;
+                        transition: all .3s linear;
+                    }
+                }
+                .checkout,.estimates{
+                    width: 100%;
+                    text-align: center;
+                    margin-bottom: 15px;
+                    cursor: pointer;
+                }
+                #shipping{
+                    display: none;
+                    #address_country,#zip-code,#address_province{
+                        display: block;
+                        width: 100%;
+                        border: 1px solid #e4e4e4;
+                        padding: 5px;
+                        margin: 5px 0 20px;
+                    }
+                    .calculate{
+                        margin-bottom: 0px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media(max-width: 768px){
+    #basket{
+        .left-card{
+            .image{
+                display: block;
+                text-align: center;
+                img{
+                    width: 150px !important;
+                }
+            }
+        }
+        .right-card{
+            .content{
+                width: 100%;
+                text-align: center;
+              .prod-elements{
+                    justify-content: center !important;
+                }
+                .count{
+                    justify-content: center !important;
+                }
+            }
+        }
+    }
+}
+@media(max-width: 576px){
+    #basket{
+        .left-card{
+            .image{
+                display: block;
+                text-align: center;
+                img{
+                    width: 150px !important;
+                }
+            }
+        }
+        .right-card{
+            .content{
+                width: 100%;
+                text-align: center;
+                .prod-elements{
+                    justify-content: center !important;
+                }
+                .count{
+                    justify-content: center !important;
+                }
+            }
+        }
+    }
+}

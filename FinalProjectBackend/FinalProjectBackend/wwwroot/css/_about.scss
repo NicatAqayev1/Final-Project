@@ -1,0 +1,778 @@
+$primary-font-family : 'Text Me One', sans-serif;
+$second-font-family : 'Philosopher', sans-serif;
+$primary-color : #c1001c;
+$second-red-color : #f01737;
+$button-hover-color : #d2aa5c;
+*{
+    margin:  0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+#aboutus{
+    background-image: url(../images/aboutus-bg.webp);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-attachment: fixed;
+    padding: 80px 0;
+    position: relative;
+    .aboutus{
+        .content{
+            text-align: center;
+            z-index: 2;
+            h2{
+                font-family: $second-font-family;
+                font-size: 36px;
+                letter-spacing: 2px;
+            }
+            h3{
+                font-family: $primary-font-family;
+                font-size: 16px;
+                margin-top: 15px;
+                color: black;
+            }
+        }
+    }
+    &::before{
+        position: absolute;
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: #e4e4e4;
+        opacity: .6;
+    }
+}
+#winery{
+    padding: 80px 0;
+    .winery{
+        .left{
+            .image{
+                img{
+                    width: 100%;
+                }
+            }
+        }
+        .right{
+            .content{
+                padding: 50px 100px 30px 0px;
+                h2{
+                    font-family: "Philosopher", sans-serif;
+                    font-size: 46px;
+                    margin-bottom: 15px;
+                }
+                p{
+                    font-family: $primary-font-family;
+                    font-size: 16px;
+                    margin-bottom: 15px;
+                }
+            }
+        }
+    }
+}
+#offer{
+    padding: 100px 0;
+    background-image: url(../images/about-offer-bg.webp);
+    background-attachment: fixed;
+    background-repeat: repeat;
+    background-position: center;
+    background-size: cover;
+    .offer{
+        .content{
+            text-align: center;
+            width: 70%;
+            margin: 0 auto;
+            h2{
+                font-family: $second-font-family;
+                color: white;
+                font-size: 46px;
+                margin-bottom: 10px;
+            }
+            h4{
+                font-family: $second-font-family;
+                color: $primary-color;
+                font-size: 22px;
+                margin-bottom: 10px;
+            }
+            p{
+                font-family: $primary-font-family;
+                color: white;
+                font-size: 16px;
+                margin: 40px 0px;
+            }
+        }
+    }
+}
+#organic{
+    padding: 60px 0;
+    .organic{
+        .left{
+            .image{
+                text-align: right;
+                img{
+                    width: 95%;
+                }
+            }
+        }
+        .right{
+            .content{
+                h2{
+                    font-family: $second-font-family;
+                    font-size: 40px;
+                    margin-bottom: 15px;
+                }
+                p{
+                    font-family: $primary-font-family;
+                    font-size: 16px;
+                    margin-bottom: 15px;
+                    padding: 0 50px 0 0;
+                }
+                .icons{
+                    justify-content: space-between;
+                    font-family: $primary-font-family;
+                    font-size: 16px;
+                    padding: 30px 0;
+                    i{
+                        font-size: 24px;
+                    }
+                    span{
+                        margin: 20px;
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+}
+#counter{
+    background-color: $primary-color;
+    padding: 80px 0;
+    .counter{
+        .counter-card {
+            font-family: $second-font-family;
+            color: white;
+            text-align: center;
+            .icon{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 50px;
+                height: 50px;
+                background-color: white;
+                border-radius: 50%;
+                margin: 20px auto;
+                i{
+                    color: black;
+                    font-size: 30px;
+                }
+            }
+            h2{
+                font-size: 40px;
+                margin-bottom: 20px;
+            }
+            h5{
+                font-size: 22px;
+            }
+        }
+    }
+}
+#staff{
+    padding: 60px 0;
+    .header{
+        text-align: center;
+        margin-bottom: 50px;
+        h2{
+            font-family: $second-font-family;
+            font-size: 46px;
+            margin-bottom: 10px;
+        }
+        h4{
+            font-size: 22px;
+            color: $primary-color;
+        }
+    }
+    .staff{
+        width: 95%;
+        margin: 0 auto;
+        .staff-card{
+            padding: 5px;
+            .image{
+                position: relative;
+                overflow: hidden;
+                .overlay{
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    transform: translate(-50%,10px);
+                    z-index: 3;
+                    transition: all 0.3s linear;
+                    opacity: 0;
+                    .social-icon{
+                        li{
+                            a{
+                                font-size: 16px;
+                                padding: 0;
+                                height: 40px;
+                                width: 40px;
+                                display: inline-block;
+                                line-height: 40px;
+                                text-align: center;
+                                color: $primary-color;
+                                background-color: white;
+                                transition: all 0.3s linear;
+                                margin: 5px;
+                                &:hover{
+                                    color: white;
+                                    transition: all 0.3s linear;
+                                    background-color: $primary-color;
+                                }
+                            }
+                        }
+                    }
+                }
+                img{
+                    width: 100%;
+                }
+                &::before{
+                    position: absolute;
+                    top: 0;
+                    left: 0px;
+                    content: "";
+                    height: 100%;
+                    position: absolute;
+                    width: 0%;
+                    transition: all 0.3s linear;
+                    background-color: black;
+                    opacity: 0.5;
+                }
+                &::after{
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    content: "";
+                    background-color: black;
+                    height: 100%;
+                    position: absolute;
+                    width: 0%;
+                    transition: all 0.3s linear;
+                    opacity: 0.5;
+                }
+                &:hover{
+                    .overlay{
+                        transform: translate(-50%,-10px);
+                        opacity: 1;
+                        transition: all 0.3s linear;
+                    }
+                    &::before,&::after{
+                        width: 50%;
+                    }
+                }
+            }
+            .content{
+                text-align: center;
+                font-family: $second-font-family;
+                margin-top: 20px;
+                h4{
+                    margin-bottom: 10px;
+                    font-size: 20px;
+                }
+                h2{
+                    color: $primary-color;
+                    font-size: 20px;
+                }
+            }
+            
+            &:nth-child(2){
+                .image{
+                    &::before{
+                        left: 1px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width : 1300px){
+    #winery{
+        padding: 80px 0;
+        .container{
+            .winery{
+                .right{
+                    padding-top: 3rem;
+                    .content{
+                        padding: 30px;
+                        h2{
+                            font-family: "Philosopher", sans-serif;
+                            font-size: 44px;
+                            margin-bottom: 15px;
+                        }
+                        p{
+                            font-family: $primary-font-family;
+                            font-size: 18px;
+                            margin-bottom: 15px;
+                        }
+                        a{
+                            font-size: 17px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media(max-width : 1200px){
+    #winery{
+        padding: 80px 0;
+        .container{
+            max-width: 95%;
+            .winery{
+                .right{
+                    padding-top: 3rem;
+                    .content{
+                        padding: 30px;
+                        h2{
+                            font-family: "Philosopher", sans-serif;
+                            font-size: 44px;
+                            margin-bottom: 15px;
+                        }
+                        p{
+                            font-family: $primary-font-family;
+                            font-size: 18px;
+                            margin-bottom: 15px;
+                        }
+                        a{
+                            font-size: 17px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #offer{
+        padding: 100px 0;
+        background-image: url(../images/about-offer-bg.webp);
+        background-attachment: fixed;
+        background-repeat: repeat;
+        background-position: center;
+        background-size: cover;
+        .container{
+            .offer{
+                .content{
+                    text-align: center;
+                    width: 75%;
+                    margin: 0 auto;
+                    h2{
+                        font-family: $second-font-family;
+                        color: white;
+                        font-size: 44px;
+                        margin-bottom: 10px;
+                    }
+                    h4{
+                        font-family: $second-font-family;
+                        color: $primary-color;
+                        font-size: 22px;
+                        margin-bottom: 10px;
+                    }
+                    p{
+                        font-family: $primary-font-family;
+                        color: white;
+                        font-size: 16px;
+                        margin: 40px 0px;
+                    }
+                }
+            }
+        }
+    }
+    #organic{
+        padding: 60px 0;
+        .container{
+            max-width: 95%;
+            .organic{
+                .left{
+                    .image{
+                        text-align: right;
+                        img{
+                            width: 100%;
+                        }
+                    }
+                }
+                .right{
+                    padding-top: 0;
+                    .content{
+                        h2{
+                            font-family: $second-font-family;
+                            font-size: 40px;
+                            margin-bottom: 15px;
+                        }
+                        p{
+                            font-family: $primary-font-family;
+                            font-size: 16px;
+                            margin-bottom: 15px;
+                            padding: 0 50px 0 0;
+                        }
+                        .icons{
+                            justify-content: space-between;
+                            font-family: $primary-font-family;
+                            font-size: 16px;
+                            padding: 30px 0;
+                            .icon{
+                                width: 50%;
+                            }
+                            i{
+                                font-size: 24px;
+                            }
+                            span{
+                                margin: 20px;
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width : 1000px){
+    
+    #offer{
+        padding: 100px 0;
+        background-image: url(../images/about-offer-bg.webp);
+        background-attachment: fixed;
+        background-repeat: repeat;
+        background-position: center;
+        background-size: cover;
+        .container{
+            .offer{
+                .content{
+                    text-align: center;
+                    width: 70%;
+                    margin: 0 auto;
+                    h2{
+                        font-family: $second-font-family;
+                        color: white;
+                        font-size: 44px;
+                        margin-bottom: 10px;
+                    }
+                    h4{
+                        font-family: $second-font-family;
+                        color: $primary-color;
+                        font-size: 22px;
+                        margin-bottom: 10px;
+                    }
+                    p{
+                        font-family: $primary-font-family;
+                        color: white;
+                        font-size: 16px;
+                        margin: 40px 0px;
+                    }
+                }
+            }
+        }
+    }
+    #organic{
+        padding: 60px 0;
+        .container{
+            max-width: 95%;
+            .organic{
+                .left{
+                    .image{
+                        text-align: right;
+                        img{
+                            width: 100%;
+                        }
+                    }
+                }
+                .right{
+                    padding-top: 0;
+                    .content{
+                        h2{
+                            font-family: $second-font-family;
+                            font-size: 40px;
+                            margin-bottom: 15px;
+                        }
+                        p{
+                            font-family: $primary-font-family;
+                            font-size: 16px;
+                            margin-bottom: 15px;
+                            padding: 0 50px 0 0;
+                        }
+                        .icons{
+                            justify-content: space-between;
+                            font-family: $primary-font-family;
+                            font-size: 16px;
+                            padding: 30px 0;
+                            .icon{
+                                width: 50%;
+                            }
+                            i{
+                                font-size: 24px;
+                            }
+                            span{
+                                margin: 20px;
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width : 767px){
+    
+    #offer{
+        padding: 100px 0;
+        background-image: url(../images/about-offer-bg.webp);
+        background-attachment: fixed;
+        background-repeat: repeat;
+        background-position: center;
+        background-size: cover;
+        .container{
+            max-width: 100%;
+            .offer{
+                .content{
+                    text-align: center;
+                    width: 100%;
+                    margin: 0 auto;
+                    h2{
+                        font-family: $second-font-family;
+                        color: white;
+                        font-size: 30px;
+                        margin-bottom: 10px;
+                    }
+                    h4{
+                        font-family: $second-font-family;
+                        color: $primary-color;
+                        font-size: 22px;
+                        margin-bottom: 10px;
+                    }
+                    p{
+                        font-family: $primary-font-family;
+                        color: white;
+                        font-size: 17px;
+                        margin: 40px 0px;
+                    }
+                }
+            }
+        }
+    }
+    #organic{
+        padding: 60px 0;
+        .container{
+            max-width: 100%;
+            .organic{
+                .left{
+                    .image{
+                        text-align: right;
+                        img{
+                            width: 100%;
+                        }
+                    }
+                }
+                .right{
+                    padding-top: 2rem;
+                    .content{
+                        h2{
+                            font-family: $second-font-family;
+                            font-size: 33px;
+                            margin-bottom: 15px;
+                        }
+                        p{
+                            font-family: $primary-font-family;
+                            font-size: 16px;
+                            margin-bottom: 15px;
+                            padding: 0 50px 0 0;
+                        }
+                        .icons{
+                            justify-content: space-between;
+                            font-family: $primary-font-family;
+                            font-size: 16px;
+                            padding: 30px 0;
+                            .icon{
+                                width: 50%;
+                            }
+                            i{
+                                font-size: 24px;
+                            }
+                            span{
+                                margin: 20px;
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #counter{
+        background-color: $primary-color;
+        padding: 80px 0;
+        .counter{
+            .counter-card {
+                font-family: $second-font-family;
+                color: white;
+                text-align: center;
+                .icon{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 50px;
+                    height: 50px;
+                    background-color: white;
+                    border-radius: 50%;
+                    margin: 20px auto;
+                    i{
+                        color: black;
+                        font-size: 25px;
+                    }
+                }
+                h2{
+                    font-size: 30px;
+                    margin-bottom: 20px;
+                }
+                h5{
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
+@media (max-width : 570px){
+    #winery{
+        padding: 80px 0;
+        .winery{
+            .right{
+                padding-top: 3rem;
+                .content{
+                    padding: 0px !important;
+                    h2{
+                        font-family: "Philosopher", sans-serif;
+                        font-size: 25px;
+                        margin-bottom: 15px;
+                    }
+                    p{
+                        font-family: $primary-font-family;
+                        font-size: 16px;
+                        margin-bottom: 15px;
+                    }
+                    a{
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+    }
+    #offer{
+        padding: 100px 0;
+        background-image: url(../images/about-offer-bg.webp);
+        background-attachment: fixed;
+        background-repeat: repeat;
+        background-position: center;
+        background-size: cover;
+        .offer{
+            .content{
+                text-align: center;
+                width: 90%;
+                margin: 0 auto;
+                h2{
+                    font-family: $second-font-family;
+                    color: white;
+                    font-size: 30px;
+                    margin-bottom: 10px;
+                }
+                h4{
+                    font-family: $second-font-family;
+                    color: $primary-color;
+                    font-size: 22px;
+                    margin-bottom: 10px;
+                }
+                p{
+                    font-family: $primary-font-family;
+                    color: white;
+                    font-size: 18px;
+                    margin: 40px 0px;
+                }
+            }
+        }
+    }
+    #organic{
+        padding: 60px 0;
+        .organic{
+            .left{
+                .image{
+                    text-align: right;
+                    img{
+                        width: 100%;
+                    }
+                }
+            }
+            .right{
+                padding-top: 2rem;
+                .content{
+                    h2{
+                        font-family: $second-font-family;
+                        font-size: 22px;
+                        margin-bottom: 15px;
+                    }
+                    p{
+                        font-family: $primary-font-family;
+                        font-size: 16px;
+                        margin-bottom: 15px;
+                        padding: 0 50px 0 0;
+                    }
+                    .icons{
+                        justify-content: space-between;
+                        font-family: $primary-font-family;
+                        font-size: 16px;
+                        padding: 30px 0;
+                        .icon{
+                            width: 50%;
+                        }
+                        i{
+                            font-size: 24px;
+                        }
+                        span{
+                            margin: 20px;
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #counter{
+        background-color: $primary-color;
+        padding: 80px 0;
+        .counter{
+            .counter-card {
+                font-family: $second-font-family;
+                color: white;
+                text-align: center;
+                .icon{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 40px;
+                    height: 40px;
+                    background-color: white;
+                    border-radius: 50%;
+                    margin: 20px auto;
+                    i{
+                        color: black;
+                        font-size: 25px;
+                    }
+                }
+                h2{
+                    font-size: 20px;
+                    margin-bottom: 20px;
+                }
+                h5{
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}

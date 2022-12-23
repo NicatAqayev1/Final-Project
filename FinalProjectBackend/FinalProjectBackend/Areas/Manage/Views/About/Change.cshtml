@@ -1,0 +1,85 @@
+﻿@model About
+
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Update Product</h1>
+            </div>
+        </div>
+        <div class="row justify-content-lg-center">
+            <div class="col-lg-8">
+                <form method="post" enctype="multipart/form-data">
+                    <h2 class="text-center">Intro</h2>
+                    <div class="form-group">
+                        <label asp-for="IntroImageFile"></label>
+                        <input class="form-control" accept="image/jpg" asp-for="IntroImageFile" placeholder="Choose ImageFile">
+                        <span class="text-danger" asp-validation-for="IntroImageFile"></span>
+                        @*<img src="~/images/AboutPage/@Model.IntroImage" />*@
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IntroHeader"></label>
+                        <input class="form-control" asp-for="IntroHeader" placeholder="Enter Name">
+                        <span class="text-danger" asp-validation-for="IntroHeader"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IntroText"></label>
+                        <input class="form-control" asp-for="IntroText" placeholder="Enter IntroText">
+                        <span class="text-danger" asp-validation-for="IntroText"></span>
+                    </div>
+                    <h2 class="text-center">About</h2>
+                    <div class="form-group">
+                        <label asp-for="AboutWineImageFile"></label>
+                        <input class="form-control" accept="image/jpg" asp-for="AboutWineImageFile" placeholder="Choose ImageFile">
+                        <span class="text-danger" asp-validation-for="AboutWineImageFile"></span>
+                        @*<img src="~/images/AboutPage/@Model.AboutWineImage" />*@
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="AboutWineHeader"></label>
+                        <input class="form-control" asp-for="AboutWineHeader" placeholder="Enter AboutWineHeader">
+                        <span class="text-danger" asp-validation-for="AboutWineHeader"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="AboutWineText" class="form-label"></label>
+                        <input class="form-control" asp-for="AboutWineText" placeholder="Enter AboutWineText">
+                        <span class="text-danger" asp-validation-for="AboutWineText"></span>
+                    </div>
+                    <h2 class="text-center">Offer</h2>
+                    <div class="form-group">
+                        <label asp-for="OfferImageFile"></label>
+                        <input class="form-control" accept="image/jpg" asp-for="OfferImageFile" placeholder="Choose ImageFile">
+                        <span class="text-danger" asp-validation-for="OfferImageFile"></span>
+                        @*<img src="~/images/AboutPage/@Model.OfferImage" />*@
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="OfferHeader"></label>
+                        <input class="form-control" asp-for="OfferHeader" placeholder="Enter OfferHeader">
+                        <span class="text-danger" asp-validation-for="OfferHeader"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="OfferText"></label>
+                        <input class="form-control" asp-for="OfferText" placeholder="Enter OfferText">
+                        <span class="text-danger" asp-validation-for="OfferText"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StaffHEader"></label>
+                        <input class="form-control" asp-for="StaffHEader" placeholder="Enter StaffHEader">
+                        <span class="text-danger" asp-validation-for="StaffHEader"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+            </div>
+        </div>
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-primary" asp-action="Index">Go To List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Script{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+}

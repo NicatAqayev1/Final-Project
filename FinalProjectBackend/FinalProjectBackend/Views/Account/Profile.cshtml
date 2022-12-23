@@ -1,0 +1,208 @@
+﻿@model MemberProfileVM
+@{
+    ViewData["Title"] = "Profile";
+    int orderCount = 0;
+    int orderItemCount = 0;
+    double totalOrderItem = 0;
+    foreach (var item in Model.Orders)
+    {
+        foreach (var item1 in item.OrderItems)
+        {
+            totalOrderItem = item1.TotalPrice;
+        }
+    }
+}
+
+<main>
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg" style="background-image: url(&quot;assets/img/banner/breadcrumb-banner.jpg&quot;);">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap text-center">
+                        <nav aria-label="breadcrumb">
+                            <h1 class="breadcrumb-title" style="font-family: 'Text Me One'; font-weight: 700; letter-spacing: 2px; font-size: 45px;">My Account</h1>
+                            <ul class="breadcrumb" style="font-family: 'Philosopher';">
+                                <li class="breadcrumb-item"><a asp-controller="home" asp-action="index" style="color: black">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page" style="color: #c1001c;">My Account</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+    <!-- my account wrapper start -->
+    <div class="my-account-wrapper section-padding">
+        <div class="container custom-container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- My Account Page Start -->
+                    <div class="myaccount-page-wrapper">
+                        <!-- My Account Tab Menu Start -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="myaccount-tab-menu nav"role="tablist">
+                                    <a href="#dashboad" class="active navs" data-toggle="dashboad">
+                                        <i class="fa fa-dashboard"></i>
+                                        Dashboard
+                                    </a>
+                                    <a href="#orders" class="navs" data-toggle="orders"><i class="fa fa-cart-arrow-down"></i> Orders</a>
+                                    <a href="#address-edit" class="navs" data-toggle="address-edit"><i class="fa fa-map-marker"></i> address</a>
+                                    <a href="#account-info" class="navs" data-toggle="account-info"><i class="fa fa-user"></i> Account Details</a>
+                                    <a  asp-controller="account" asp-action="logout"><i class="fa fa-sign-out"></i> Logout</a>
+                                </div>
+                            </div>
+                            <!-- My Account Tab Menu End -->
+                            <!-- My Account Tab Content Start -->
+                            <div class="col-lg-12">
+                                <div class="tab-content" id="myaccountContent">
+                                    <!-- Single Tab Content Start -->
+                                    <div class="tab-pane fade show active" id="dashboad" data-toggle="dashboad" role="tabpanel">
+                                        <div class="myaccount-content">
+                                            <h3>Dashboard</h3>
+                                            <div class="welcome" style="display: block !important;opacity : 1 !important;">
+                                                <p style="color: black; font-family: 'Text me one'; font-size: 18px;">Hello, <strong>@User.Identity.Name</strong> (If Not <strong>@User.Identity.Name !</strong><a asp-controller="account" asp-action="logout" style="color: #c1001c;text-decoration: underline;" class="logout"> Logout</a>)</p>
+                                            </div>
+                                            <p class="mb-0">From your account dashboard. you can easily check &amp; view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
+                                        </div>
+                                    </div>
+                                    <!-- Single Tab Content End -->
+                                    <!-- Single Tab Content Start -->
+                                    <div class="tab-pane fade" id="orders" data-toggle="orders" role="tabpanel">
+                                        <div class="myaccount-content">
+                                            <h3>Orders</h3>
+                                            <div class="myaccount-table table-responsive text-center">
+
+                                                @if (Model.Orders.Count() > 0)
+                                                {
+                                            <table class="table table-bordered">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>Order</th>
+                                                        <th>User</th>
+                                                        <th>Product Count</th>
+                                                        <th>Total</th>
+                                                        <th>Date</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model.Orders)
+                                                    {
+                                                        orderCount++;
+                                                        orderItemCount = 0;
+                                            <tr data-toggle="collapse" data-target="#demo@(orderCount)" class="accordion-toggle openCloseOrderItem">
+                                                <td>@orderCount</td>
+                                                <td>@item.AppUser.FullName</td>
+                                                <td>@item.OrderItems.Count()</td>
+                                                <td>@item.OrderItems.Sum(o => o.TotalPrice + o.Product.ExTax)</td>
+                                                <td>@item.CreatedAt?.ToString("MMMM dd, yyyy")</td>
+                                                <td>@item.Status</td>
+                                            </tr>
+                                                                <tr>
+                                                                    <td colspan="12" class="hiddenRow">
+                                                                        <div class="accordian-body collapse" id="demo@(orderCount)" style="opacity: 1;">
+                                                                            <table class="table table-striped">
+                                                                                <thead>
+                                                                                    <tr class="info">
+                                                                                        <th>#</th>
+                                                                                        <th>Product Name</th>
+                                                                                        <th>Product Color</th>
+                                                                                        <th>Product Size</th>
+                                                                                        <th>Count</th>
+                                                                                        <th>Price</th>
+                                                                                        <th>Extax</th>
+                                                                                        <th>Total Price</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    @foreach (var orderItem in item.OrderItems)
+                                                                                    {
+                                                                                        orderItemCount++;
+                                                                <tr data-toggle="collapse" class="accordion-toggle">
+                                                                    <td>@orderItemCount</td>
+                                                                    <td>@orderItem?.Product?.Name </td>
+                                                                    <td>@orderItem?.Size </td>
+                                                                    <td>@orderItem?.Color </td>
+                                                                    <td>@orderItem?.Count</td>
+                                                                    <td>@orderItem?.Price</td>
+                                                                    <td>@orderItem?.Product.ExTax</td>
+                                                                    <td>@(orderItem?.TotalPrice+orderItem?.Product.ExTax)</td>
+                                                                </tr>
+}
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+}
+                                                </tbody>
+                                            </table> }
+                                                else
+                                                {
+                                                    <p style="color: black; font-family: 'Text me one'; font-size: 18px; font-weight: 700;">You have no any order yet. <a asp-controller="shop" asp-action="index" style="color: #c1001c;text-decoration: underline;">Go shopping</a></p>
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Single Tab Content End -->
+                                    <!-- Single Tab Content Start -->
+                                    <div class="tab-pane fade" id="address-edit" data-toggle="address-edit" role="tabpanel">
+                                        <div class="myaccount-content">
+                                            <h3>Billing Address</h3>
+                                            <address>
+                                                <p><strong>@User.Identity.Name</strong></p>
+                                                <ol>
+                                                    @if (ViewBag.AppUser.Addresses != null)
+                                                    {
+                                                        @foreach (Address Address in ViewBag.AppUser.Addresses)
+                                                        {
+                                                        <li style="width: 100%;">@Address.Name</li>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <p style="color: black; font-family: 'Text me one'; font-size: 18px; font-weight: 700;">You have no any address yet. <a asp-controller="shop" asp-action="index" style="color: #c1001c;text-decoration: underline;">Go shopping</a></p>
+                                                    }
+                                                </ol>
+                                                <p>Mobile: @(ViewBag.AppUser.PhoneNumber != null ? ViewBag.AppUser.PhoneNumber : "You didn't save your phone number")</p>
+                                            </address>
+                                        </div>
+                                    </div>
+                                    <!-- Single Tab Content End -->
+                                    <!-- Single Tab Content Start -->
+                                    <div class="tab-pane fade" id="account-info" data-toggle="account-info" role="tabpanel">
+                                        <div class="myaccount-content" id="login" style="padding: 0;">
+                                            <h3>Account Details</h3>
+                                            <div class="account-details-form login" style="display: block;opacity : 1;">
+                                                @await Html.PartialAsync("_ProfileFormPartial", Model.Member)
+                                            </div>
+                                        </div>
+                                    </div> <!-- Single Tab Content End -->
+                                </div>
+                            </div> <!-- My Account Tab Content End -->
+                        </div>
+                    </div> <!-- My Account Page End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- my account wrapper end -->
+</main>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(document).on("click", ".openCloseOrderItem", function () {
+            $(this).next().find(".accordian-body").slideToggle();
+            $(this).next().find(".accordian-body").css({
+                "opacity": "1",
+                "display":"block"
+            });
+        })
+    })
+</script>

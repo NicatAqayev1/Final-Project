@@ -1,0 +1,28 @@
+﻿@model ProductVM
+<div class="modal-prod row">
+    <div class="left-modal col-lg-6">
+        <div class="swiper mySwiperModal">
+            <div class="swiper-wrapper">
+                @foreach (ProductColorSize productImage in Model.Product.ProductColorSizes)
+                {
+                    <div class="swiper-slide">
+                        <div class="image">
+                            <img src="~/images/products/@productImage.Image" alt="">
+                        </div>
+                    </div>
+                }
+            </div>
+            @*<div class="swiper-button-next swiper-button-next-modal"></div>
+            <div class="swiper-button-prev swiper-button-prev-modal"></div>*@
+        </div>
+    </div>
+    <div class="right-modal col-lg-6">
+        @await Html.PartialAsync("_ProductRightModalPartial", Model)
+    </div>
+</div>
+@section Script{
+    <link rel="stylesheet"
+          href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="~/js/main.js"></script>
+}

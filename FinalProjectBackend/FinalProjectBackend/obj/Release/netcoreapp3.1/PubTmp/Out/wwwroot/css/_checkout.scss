@@ -1,0 +1,259 @@
+$primary-font-family : 'Text Me One', sans-serif;
+$second-font-family : 'Philosopher', sans-serif;
+$primary-color : #c1001c;
+$second-red-color : #f01737;
+$button-hover-color : #d2aa5c;
+#checkout{
+    .checkout{
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+        .left{
+            padding: 60px 0px 60px 40px;
+            .left-checkout-content{
+                width: 80%;
+                margin: 0 auto 0 auto;
+                h2{
+                    font-size: 28px;
+                    font-weight: 400;
+                }
+                .pages-links{
+                    justify-content: flex-start;
+                    font-size: 12px;
+                    margin-bottom: 20px;
+                    li{
+                        a{
+                            color: $primary-color;
+                            margin: 0 10px;
+                        }
+                        span{
+                            margin: 0 10px;
+                        }
+                    }
+                }
+                .contact-have{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .contInf{
+                        font-size: 18px;
+                        margin: 10px 0 15px;
+                    }
+                    .already{
+                        font-size: 14px;
+                        span{
+    
+                        }
+                        a{
+                            color: $primary-color;
+                        }
+                    }
+                }
+                .shippingadd{
+                    font-size: 18px;
+                    font-weight: 400;
+                    margin: 35px 0 15px 0;
+                }
+                .labelInput{
+                    position: relative;
+                    padding: 0;
+                    padding: 5px;
+                    input,select{
+                        width: 100%;
+                        border: 2px solid #e4e4e496;
+                        padding: 12px;
+                        border-radius: 5px;
+                        font-size: 14px;
+                        transition: all .3s;
+                        &:focus{
+                            border-color: $primary-color;
+                            transition: all .3s;
+                        }
+                    }
+                    input[type="checkbox"]{
+                        width: 18px;
+                        height: 18px;
+                        -webkit-transition: all 0.2s ease-in-out;
+                        transition: all 0.2s ease-in-out;
+                        position: relative;
+                        cursor: pointer;
+                        vertical-align: -4px;
+                        border: 1px solid;
+                        &:checked{
+    
+                        }
+                    }
+                    .forCheckbox{
+                        position: static;
+                        font-size: 14px;
+                    }
+                    select{
+                        padding: 10px 5px;
+                    }
+                    label{
+                        position: absolute;
+                        font-size: 12px;
+                        top: 5px;
+                        left: 17px;
+                        opacity: 1;
+                    }
+                }
+                .emailme-checkbox-div{
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    label{
+                        font-size: 14px;
+                        margin-left: 10px;
+                    }
+                }
+                #checkout-form{
+                    label{
+    
+                    }
+                    input{
+    
+                    }
+                    .select{
+                        label{
+    
+                        }
+                        select{
+    
+                        }
+                        #saveInfor{
+    
+                        }
+                    }
+                    .zipcode-div{
+                        padding: 7px;
+                        label{
+    
+                        }
+                        input{
+    
+                        }
+                    }
+                    .savecheck-div{
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        label{
+                            font-size: 14px;
+                            margin-left: 10px;
+                        }
+                    }
+                }
+                .buttons{
+                    margin-top: 30px;
+                    .continue{
+                        background-color: $primary-color;
+                        color: white;
+                        border-radius: 4px;
+                        font-family: inherit;
+                        font-size: 13px;
+                        font-weight: 600;
+                        padding: 1.4em 1.7em;
+                        letter-spacing: 0.3px;
+                        border-radius: 6px;
+                        margin-right: 10px;
+                        &:hover{
+                            background-color: #8e0015;
+                        }
+                    }
+                    .return{
+                        color: $primary-color;
+                        font-family: inherit;
+                        font-size: 13px;
+                        font-weight: 600;
+                        letter-spacing: 0.3px;
+                    }
+                }
+            }
+        }
+        .right{
+            padding: 60px 40px 60px 0px;
+            background-color: #fafafa;
+            border-left: 1px solid #e4e4e4;
+            .content{
+                width: 80%;
+                margin: 0 auto 0 auto;
+                .baskets{
+                    .basket-el{
+                        margin: 8px 0;
+                        .left-side{
+                            .image{
+                                width: 4.6em;
+                                height: 4.6em;
+                                overflow: hidden;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                object-fit: cover;
+                                padding: 5px;
+                                border-radius: 8px;
+                                border: 1px solid rgba(0,0,0,0.1);
+                                background: white;
+                                img{
+                                    width: 100%;
+                                }
+                            }
+                        }
+                        .right-side{
+                            display: flex;
+                            justify-content: center;
+                            align-items: flex-start;
+                            flex-direction: column;
+                            h4{
+                                font-size: 14px;
+                                font-weight: 600;
+                                margin: 0;
+                            }
+                            .details{
+                                width: 100%;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                ul{
+                                    li{
+                                        font-size: 12px;
+                                        &::after{
+                                            content: "/";
+                                            display: inline-block;
+                                            position: relative;
+                                            -webkit-transform: translateY(-1px);
+                                            transform: translateY(-1px);
+                                            padding: 0 10px;
+                                        }
+                                    }
+                                }
+                                span{
+                                    font-weight: 600;
+                                    font-size: 14px;
+                                }
+                            }
+                        }
+                    }
+                }
+                .subshiptotal{
+                    .subtotal,.shipping,.total{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        color: #535353;
+                        font-size: 14px;
+                        span{
+
+                        }
+                        .subtotal-value{
+                            font-weight: 600;
+                        }
+                        .total-value{
+                            font-size: 23px;
+                            color: black;
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
